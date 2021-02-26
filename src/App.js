@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Web3 from 'web3';
 import contract_abi from './build/contracts/Lottery.json';
-const contractAddress = '0x5612b6D5A9EF2C2B56f00e2349601A8811B0D652';
+import Chance from 'chance';
+const contractAddress = '0x1D8a2F84C7dAa3067aA885807a26Ad6DEAB85745';
 const ENTER_PRICE_LOTTERY_IN_ETHER = '0.2';
+const chance = new Chance();
 let LotteryContract;
 let web3;
 let accounts;
@@ -19,13 +21,11 @@ const loadDapp = async () => {
           LotteryContract = new web3.eth.Contract(contract_abi.abi, contractAddress);
       });
       window.ethereum.on('accountsChanged', (chainId) => {
-        // Handle the new chain.
-        // Correctly handling chain changes can be complicated.
-        // We recommend reloading the page unless you have good reason not to.
         window.location.reload();
       });
     } catch(e) {
       // User has denied account access to DApp...
+      window.location.reload();
     }
   }
   // Legacy DApp Browsers
@@ -40,8 +40,13 @@ const loadDapp = async () => {
 
 loadDapp();
 
+const startDate = new Date();
+const endDate = new Date();
+const numberOfDayToAdd = 1;
+endDate.setDate(endDate.getDate() + numberOfDayToAdd );
+
 const startLottery = async () => {
-  const result1 = await LotteryContract.methods.start_new_lottery().send({ from: accounts[0]});
+  const result1 = await LotteryContract.methods.start_new_lottery(startDate.getTime(), endDate.getTime()).send({ from: accounts[0]});
   console.log('Start new lottery');
   console.log(result1);
 };
@@ -54,7 +59,8 @@ const enterIntoLottery = async () => {
 };
 
 const pickWinner = async () => {
-  const result3 = await LotteryContract.methods.pickWinner().send({ from: accounts[0] });
+  const seed = chance.natural();
+  const result3 = await LotteryContract.methods.pickWinner(seed).send( chance.natural(), { from: accounts[0] });
   console.log('Pick winner');
   console.log(result3);
 };
@@ -64,9 +70,9 @@ const getLastWinner = async () => {
   console.log('Get last winner');
   console.log(result4);
   return {
-    block: result4[0],
-    address: result4[1],
-    amount: web3.utils.fromWei(result4[2], "ether")
+    block: result4[1],
+    address: result4[2],
+    amount: web3.utils.fromWei(result4[3], "ether")
   };
 };
 const getBalancePrice = async () => {
