@@ -91,8 +91,8 @@ function* pickWinnerSaga(){
 
 function* getLastWinnerSaga(){
   try{
-    yield getLastWinnerApi();
-    yield put({type: GET_LAST_WINNER_SUCCESS});
+    const result = yield getLastWinnerApi();
+    yield put({type: GET_LAST_WINNER_SUCCESS, lastWinner: result});
   } catch (e) {
     yield put({type: GET_LAST_WINNER_FAIL});
     yield put({
@@ -105,8 +105,8 @@ function* getLastWinnerSaga(){
 
 function* getBalancePriceSaga(){
   try{
-    yield getBalancePriceApi();
-    yield put({type: GET_BALANCE_PRICE_SUCCESS});
+    const result = yield getBalancePriceApi();
+    yield put({type: GET_BALANCE_PRICE_SUCCESS, balancePrice: result});
   } catch (e) {
     yield put({type: GET_BALANCE_PRICE_FAIL});
     yield put({

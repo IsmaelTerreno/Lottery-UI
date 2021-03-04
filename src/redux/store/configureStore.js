@@ -14,6 +14,6 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-export default function() {
+export const MainStore = () => {
   return store;
 }

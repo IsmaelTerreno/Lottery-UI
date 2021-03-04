@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import lottery from './lottery';
+import { LoteryReducer } from './lottery';
 
 const rootReducer = combineReducers({
-  lottery
+  lottery: LoteryReducer
 });
 
 export default rootReducer;

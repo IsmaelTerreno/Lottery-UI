@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import 'fontsource-roboto';
@@ -14,6 +14,8 @@ import {
 } from '@material-ui/core';
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME } from "./config";
+import { loadDapp, LotteryContract } from "./lib/DappUtils";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,8 +40,22 @@ const App = ({
   balancePrice,
   lastWinner,
   enterIntoLottery,
+  getLastWinner,
+  getBalancePrice,
 }) => {
   const classes = useStyles();
+  useEffect(() => {
+    const fetchData = async() => {
+      await loadDapp();  
+      setTimeout(async()=>{
+        if (LotteryContract){
+          await getBalancePrice();
+          await getLastWinner();
+        }
+      }, 1500);
+    }
+    fetchData();
+  });
   return(
     <>
       <CssBaseline />
@@ -94,10 +110,12 @@ App.defaultProps = {
 
 App.propTypes = {
   balancePrice: PropTypes.number,
-  lastWinner: PropTypes.object,
+  lastWinner: PropTypes.array,
   startLottery: PropTypes.func,
   pickWinner: PropTypes.func,
   enterIntoLottery: PropTypes.func,
+  getLastWinner: PropTypes.func,
+  getBalancePrice: PropTypes.func,
 };
 
 export default App;

@@ -11,11 +11,11 @@ export const loadDapp = async () => {
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
     try { 
-      window.ethereum.enable().then(async() =>{
+      window.ethereum.request({ method: 'eth_requestAccounts' }).then(async() =>{
           accounts = await web3.eth.getAccounts();
           // User has allowed account access to DApp...
           LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS);
-      });
+      });     
       window.ethereum.on('accountsChanged', (chainId) => {
         window.location.reload();
       });

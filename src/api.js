@@ -28,22 +28,30 @@ export const pickWinnerApi = async () => {
 };
   
 export const getLastWinnerApi = async () => {
-    const result4 = await LotteryContract.methods.getLastWinner().call({ from: accounts[0] });
-    console.log('Get last winner');
-    console.log(result4);
-    return {
-        block: result4[1],
-        address: result4[2],
-        amount: web3.utils.fromWei(result4[3], "ether")
-    };
+    try {
+        const result4 = await LotteryContract.methods.getLastWinner().call({ from: accounts[0] });
+        console.log('Get last winner');
+        console.log(result4);
+        return {
+            block: result4[1],
+            address: result4[2],
+            amount: web3.utils.fromWei(result4[3], "ether")
+        }; 
+    } catch (error) {
+        return null; 
+    }  
 };
 
 export const getBalancePriceApi = async () => {
-    const result4 = await LotteryContract.methods.getMainBalance().call({ from: accounts[0] });
-    console.log('Get balance price');
-    console.log(web3.utils.fromWei(result4, "ether"));
-    return web3.utils.fromWei(result4, "ether");
-};
+    try {
+        const result4 = await LotteryContract.methods.getMainBalance().call({ from: accounts[0] });
+        console.log('Get balance price');
+        console.log(web3.utils.fromWei(result4, "ether"));
+        return web3.utils.fromWei(result4, "ether");
+    } catch (error) {
+        return 0;
+    }
+};   
 
 
 export const getLastWinnersApi = async () => {

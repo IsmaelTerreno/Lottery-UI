@@ -5,6 +5,8 @@ import {
     startNewLottery,
     enterIntoLottery,
     pickWinner,
+    getLastWinner,
+    getBalancePrice,
 } from "../redux/actions/lottery";
 import { 
     getWinnersListSelector,
@@ -31,6 +33,12 @@ const mapDispatchToProps = dispatch => {
         },
         findLastWinners: () => {
             dispatch(findLastWinners());
+        },
+        getLastWinner: () => {
+            dispatch(getLastWinner());
+        },
+        getBalancePrice: () => {
+            dispatch(getBalancePrice());
         },
     };
 };
