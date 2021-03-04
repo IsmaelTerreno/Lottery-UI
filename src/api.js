@@ -1,7 +1,7 @@
 import { LotteryContract, web3, accounts } from "./lib/DappUtils";
 import Chance from 'chance';
 const chance = new Chance();
-const ENTER_PRICE_LOTTERY_IN_ETHER = '0.2';
+const ENTER_PRICE_LOTTERY_IN_ETHER = '0.01';
 
 export const startLotteryApi = async () => {
     const startDate = new Date();
@@ -14,17 +14,26 @@ export const startLotteryApi = async () => {
 };
   
 export const enterIntoLotteryApi = async () => {
-    const ENTER_PRICE = web3.utils.toWei(ENTER_PRICE_LOTTERY_IN_ETHER, "ether"); 
-    const result2 = await LotteryContract.methods.enter().send({ from: accounts[0], value: ENTER_PRICE });
-    console.log('Enter into lottery');
-    console.log(result2);
+    try {
+        const ENTER_PRICE = web3.utils.toWei(ENTER_PRICE_LOTTERY_IN_ETHER, "ether"); 
+        const result2 = await LotteryContract.methods.enter().send({ from: accounts[0], value: ENTER_PRICE });
+        console.log('Enter into lottery');
+        console.log(result2);
+    } catch (error) {
+        console.log(error.message);
+    }
+    
 };
   
-export const pickWinnerApi = async () => {
-    const seed = chance.natural();
-    const result3 = await LotteryContract.methods.pickWinner(seed).send( chance.natural(), { from: accounts[0] });
-    console.log('Pick winner');
-    console.log(result3);
+export const pickWinnerApi = async () => { 
+    try {
+        const seed = chance.natural();
+        const result3 = await LotteryContract.methods.pickWinner(seed).send( chance.natural(), { from: accounts[0] });
+        console.log('Pick winner');
+        console.log(result3);
+    } catch (error) {
+        console.log(error);
+    } 
 };
   
 export const getLastWinnerApi = async () => {

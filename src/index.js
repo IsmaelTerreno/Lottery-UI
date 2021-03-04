@@ -5,8 +5,9 @@ import './index.css';
 import App from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
+import { loadDapp } from "./lib/DappUtils";
 const store = MainStore();
-
+loadDapp();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
