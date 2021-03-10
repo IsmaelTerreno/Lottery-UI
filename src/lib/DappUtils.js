@@ -25,6 +25,6 @@ export const loginDapp = async () => {
     LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS);    
   } catch(e) {
     // User has denied account access to DApp...
-    // window.location.reload();
+    window.location.reload();
   }
 };

@@ -1,3 +1,5 @@
+import moment from "moment";
+import { FORMAT_DATE_TIME } from "./config";
 import { LotteryContract, web3, accounts } from "./lib/DappUtils";
 import Chance from 'chance';
 const chance = new Chance();
@@ -8,29 +10,22 @@ export const startLotteryApi = async () => {
     const endDate = new Date();
     const numberOfDayToAdd = 1;
     endDate.setDate(endDate.getDate() + numberOfDayToAdd );
-    const result1 = await LotteryContract.methods.start_new_lottery(startDate.getTime(), endDate.getTime()).send({ from: accounts[0]});
-    console.log('Start new lottery');
-    console.log(result1);
+    await LotteryContract.methods.start_new_lottery(startDate.getTime(), endDate.getTime()).send({ from: accounts[0]});
 };
   
 export const enterIntoLotteryApi = async () => {
     try {
         const ENTER_PRICE = web3.utils.toWei(ENTER_PRICE_LOTTERY_IN_ETHER, "ether"); 
-        const result2 = await LotteryContract.methods.enter().send({ from: accounts[0], value: ENTER_PRICE });
-        console.log('Enter into lottery');
-        console.log(result2);
+        await LotteryContract.methods.enter().send({ from: accounts[0], value: ENTER_PRICE });
     } catch (error) {
         console.log(error.message);
     }
-    
 };
   
 export const pickWinnerApi = async () => { 
     try {
         const seed = chance.natural();
-        const result3 = await LotteryContract.methods.pickWinner(seed).send( chance.natural(), { from: accounts[0] });
-        console.log('Pick winner');
-        console.log(result3);
+        await LotteryContract.methods.pickWinner(seed).send( chance.natural(), { from: accounts[0] });
     } catch (error) {
         console.log(error);
     } 
@@ -39,8 +34,6 @@ export const pickWinnerApi = async () => {
 export const getLastWinnerApi = async () => {
     try {
         const result4 = await LotteryContract.methods.getLastWinner().call({ from: accounts[0] });
-        console.log('Get last winner');
-        console.log(result4);
         return {
             block: result4[1],
             address: result4[2],
@@ -54,9 +47,7 @@ export const getLastWinnerApi = async () => {
 export const getBalancePriceApi = async () => {
     try {
         const result4 = await LotteryContract.methods.getMainBalance().call({ from: accounts[0] });
-        console.log('Get balance price');
-        console.log(web3.utils.fromWei(result4, "ether"));
-        return web3.utils.fromWei(result4, "ether");
+        return parseFloat(web3.utils.fromWei(result4, "ether"));
     } catch (error) {
         return 0;
     }
@@ -65,11 +56,18 @@ export const getBalancePriceApi = async () => {
 
 export const getLastWinnersApi = async () => {
     const result4 = await LotteryContract.methods.getLast40Winners().call({ from: accounts[0] });
-    console.log('Get last 40 winners');
-    console.log(result4);
-    return {
-        block: result4[1],
-        address: result4[2],
-        amount: web3.utils.fromWei(result4[3], "ether")
-    };
+    let winners = [];
+    result4[0].forEach((winner, index) => {
+       const amount = parseFloat(web3.utils.fromWei(result4[0][index], "ether"));
+       if(amount > parseFloat(0)){
+            winners.push({
+                address: result4[4][index],
+                block: result4[3][index],
+                startDate: moment(parseInt(result4[1][index])).format(FORMAT_DATE_TIME),
+                endDate:moment(parseInt(result4[2][index])).format(FORMAT_DATE_TIME),
+                amount: amount
+            }); 
+       }
+    });
+    return winners;
 };

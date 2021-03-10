@@ -5,9 +5,17 @@ import './index.css';
 import App from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
-import { loadDapp } from "./lib/DappUtils";
+import { loadDapp, LotteryContract, loginDapp } from "./lib/DappUtils";
 const store = MainStore();
 loadDapp();
+const checkDappSession = () =>{
+  setInterval(async() => {
+    if (!LotteryContract){
+      loginDapp();
+    }  
+  }, 2000);
+}
+//checkDappSession();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
+import WinnersTable from "./WinnersTable";
 import 'fontsource-roboto';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +11,7 @@ import {
   Grid,
   Typography,
   AppBar,
-  Toolbar  
+  Toolbar, 
 } from '@material-ui/core';
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME } from "./config";
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  table: {
+    minWidth: 650,
+  },
 }));
 
 const App = ({
@@ -42,6 +46,8 @@ const App = ({
   enterIntoLottery,
   getLastWinner,
   getBalancePrice,
+  findLastWinners,
+  winners,
 }) => {
   const classes = useStyles();
   return(
@@ -77,6 +83,7 @@ const App = ({
                   if (LotteryContract){
                     await getBalancePrice();
                     await getLastWinner();
+                    await findLastWinners();
                   }  
                 }, 1500);
               }}>
@@ -90,13 +97,19 @@ const App = ({
               <Typography variant="h3" component="h2" gutterBottom>
                 <CountUp end={balancePrice} decimals={2} /> ETH
               </Typography>
-              <Typography variant="subtitle1" component="p" gutterBottom>
-                Last winner address { lastWinner && lastWinner.address }
-              </Typography>
+              { 
+                lastWinner && 
+                <Typography variant="subtitle1" component="p" gutterBottom>
+                  Last winner address { lastWinner.address }
+                </Typography>
+              }
               <Button onClick={enterIntoLottery} variant="contained" color="primary">
                 Participate
               </Button>
             </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <WinnersTable winners={winners}/>
           </Grid>
         </Grid>
       </div>
@@ -117,6 +130,8 @@ App.propTypes = {
   enterIntoLottery: PropTypes.func,
   getLastWinner: PropTypes.func,
   getBalancePrice: PropTypes.func,
+  findLastWinners: PropTypes.func,
+  winners: PropTypes.array,
 };
 
 export default App;

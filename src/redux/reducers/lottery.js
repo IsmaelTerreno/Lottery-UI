@@ -37,8 +37,9 @@ export const LoteryReducer = (state = initState, action) => {
 }
 
 const currentLotteySelector = state => state.lottery.current;
-const winnersListSelector = state => state.lottery.list;
+const winnersListSelector = state => state.lottery.winners;
 const lastWinnerSelector = state => state.lottery.lastWinner;
+const balancePriceSelector = state => state.lottery.balancePrice;
 
 
 export const getCurrentLottey = createSelector(
@@ -55,3 +56,9 @@ export const getLastWinnerSelector = createSelector(
   lastWinnerSelector,
   winner => winner
 );
+
+export const getBalancePriceSelector = createSelector(
+  balancePriceSelector,
+  balancePrice => balancePrice
+);
+

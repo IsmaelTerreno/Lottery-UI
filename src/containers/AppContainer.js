@@ -11,12 +11,14 @@ import {
 import { 
     getWinnersListSelector,
     getLastWinnerSelector,
+    getBalancePriceSelector,
 } from "../redux/reducers/lottery";
 
 const mapStateToProps = state => {
     return {
         winners: getWinnersListSelector(state),
         lastWinner: getLastWinnerSelector(state),
+        balancePrice: getBalancePriceSelector(state),
     }
 };
   
