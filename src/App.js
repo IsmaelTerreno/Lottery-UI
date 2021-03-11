@@ -115,13 +115,11 @@ const App = ({
             color="inherit"
             onClick={async ()=>{
               await loginDapp();
-              setTimeout(() => {
-                if (LotteryContract){
-                  getBalancePrice();
-                  getLastWinner();
-                  findLastWinners();
-                }  
-              }, 1500);
+              if (LotteryContract){
+                getBalancePrice();
+                getLastWinner();
+                findLastWinners();
+              } 
             }}>
               Use { MAIN_APP_NAME }
           </Button>
@@ -133,14 +131,14 @@ const App = ({
         <Grid container spacing={8}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>    
-              <img src={ehtLogo} className={classes.ehtLogo} />
+              <img alt={MAIN_APP_NAME} src={ehtLogo} className={classes.ehtLogo} />
               <Typography 
                 className={classes.balanceLabel}   
                 variant="h3" 
                 component="h2" 
                 gutterBottom
               >
-                <CountUp end={balancePrice} decimals={2} /> <span className={classes.balanceSymbol} >ETH</span> 
+                <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
               <Typography 
                 className={classes.balanceSubtitle}  

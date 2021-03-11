@@ -8,8 +8,10 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,  
+  TableRow,
+  Typography,  
 } from '@material-ui/core';
+import Grow from '@material-ui/core/Grow';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,38 +31,132 @@ const WinnersTable = ({
   winners,
 }) => {
   const classes = useStyles();
+  let delayEffectTime = 100;
   return(
     <TableContainer component={Paper}>
       <Table size="small" className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Profit</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Block</TableCell>
-            <TableCell>Start date</TableCell>
-            <TableCell>End date</TableCell>
+            <TableCell>
+              <Typography  
+                className={classes.title}
+                variant="p"
+              >
+                Profit
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography  
+                className={classes.title}
+                variant="p"
+              >
+                Address
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography  
+                className={classes.title}
+                variant="p"
+              >
+                Block
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography  
+                className={classes.title}
+                variant="p"
+              >
+                Start date
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography  
+                className={classes.title}
+                variant="p"
+              >
+                End date
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {winners.map((row, idx) => (
+          {winners.map((row, idx) => {
+            delayEffectTime += 150;
+            return (
             <TableRow key={row.address + '-'+ idx}>
               <TableCell >
-                {row.amount}
+                <Grow
+                      in
+                      style={{ transformOrigin: '0 0 0' }}
+                      timeout={delayEffectTime} 
+                  >
+                    <Typography  
+                      className={classes.title}
+                      variant="p"
+                    >
+                      {row.amount}
+                    </Typography>
+                </Grow>
               </TableCell>
               <TableCell >
-                {row.address}
+                <Grow
+                      in
+                      style={{ transformOrigin: '0 0 0' }}
+                      timeout={delayEffectTime} 
+                  >
+                    <Typography  
+                      className={classes.title}
+                      variant="p"
+                    >
+                      {row.address}
+                    </Typography>
+                </Grow>
               </TableCell>
               <TableCell >
-                {row.block}
+                <Grow
+                      in
+                      style={{ transformOrigin: '0 0 0' }}
+                      timeout={delayEffectTime} 
+                  >
+                    <Typography  
+                      className={classes.title}
+                      variant="p"
+                    >
+                      {row.block}
+                    </Typography>
+                </Grow>
               </TableCell>
               <TableCell >
-                {row.startDate}
+                <Grow
+                    in
+                    style={{ transformOrigin: '0 0 0' }}
+                    timeout={delayEffectTime} 
+                >
+                    <Typography  
+                      className={classes.title}
+                      variant="p"
+                    >
+                      {row.startDate}
+                    </Typography>
+                </Grow>
               </TableCell>
               <TableCell>
-                {row.endDate}
+                <Grow
+                    in
+                    style={{ transformOrigin: '0 0 0' }}
+                    timeout={delayEffectTime} 
+                >
+                    <Typography  
+                      className={classes.title}
+                      variant="p"
+                    >
+                      {row.endDate}
+                    </Typography>
+                </Grow>
               </TableCell>
             </TableRow>
-          ))}
+          )}
+          )}
         </TableBody>
       </Table>
     </TableContainer>
