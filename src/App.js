@@ -21,14 +21,14 @@ import ehtLogo from './img/ethereum.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    padding: '40px',
     height: '1200px'
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    marginTop:'76px',
+    marginTop:'56px',
     //backgroundImage: 'linear-gradient(225deg, #23292e 0%, #121314 100%)',
   },
   menuButton: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#5930ce',
     fontWeight: 'bold',
     fontSize: '21px',
+    textTransform: 'capitalize',
   }
 }));
 
@@ -84,52 +85,52 @@ const App = ({
   return(
     <>
       <CssBaseline />
+      <AppBar position="fixed">
+        <Toolbar>
+          <Typography  
+            className={classes.title}
+            variant="h6"
+          >
+            { MAIN_APP_NAME }
+          </Typography>
+          {
+            isAdminRole && 
+            <Button 
+              color="inherit"
+              onClick={startLottery}
+            >
+              Start lottery
+            </Button>
+          }
+          {
+            isAdminRole && 
+            <Button 
+              color="inherit"
+              onClick={pickWinner}
+            >
+              Pick winner
+            </Button>
+          }
+          <Button 
+            color="inherit"
+            onClick={async ()=>{
+              await loginDapp();
+              setTimeout(() => {
+                if (LotteryContract){
+                  getBalancePrice();
+                  getLastWinner();
+                  findLastWinners();
+                }  
+              }, 1500);
+            }}>
+              Use { MAIN_APP_NAME }
+          </Button>
+        </Toolbar>
+      </AppBar>
       <div 
         className={classes.root}
       >
-        <AppBar position="fixed">
-          <Toolbar>
-            <Typography  
-              className={classes.title}
-              variant="h6"
-            >
-              { MAIN_APP_NAME }
-            </Typography>
-            {
-              isAdminRole && 
-              <Button 
-                color="inherit"
-                onClick={startLottery}
-              >
-                Start lottery
-              </Button>
-            }
-            {
-              isAdminRole && 
-              <Button 
-                color="inherit"
-                onClick={pickWinner}
-              >
-                Pick winner
-              </Button>
-            }
-            <Button 
-              color="inherit"
-              onClick={async ()=>{
-                await loginDapp();
-                setTimeout(async() => {
-                  if (LotteryContract){
-                    await getBalancePrice();
-                    await getLastWinner();
-                    await findLastWinners();
-                  }  
-                }, 1500);
-              }}>
-                Use { MAIN_APP_NAME }
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Grid container spacing={3}>
+        <Grid container spacing={8}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>    
               <img src={ehtLogo} className={classes.ehtLogo} />

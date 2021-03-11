@@ -34,21 +34,18 @@ const WinnersTable = ({
       <Table size="small" className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Start date</TableCell>
-            <TableCell>End date</TableCell>
+            <TableCell>Profit</TableCell>
             <TableCell>Address</TableCell>
             <TableCell>Block</TableCell>
-            <TableCell>Total</TableCell>
+            <TableCell>Start date</TableCell>
+            <TableCell>End date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {winners.map((row, idx) => (
             <TableRow key={row.address + '-'+ idx}>
               <TableCell >
-                {row.startDate}
-              </TableCell>
-              <TableCell>
-                {row.endDate}
+                {row.amount}
               </TableCell>
               <TableCell >
                 {row.address}
@@ -57,7 +54,10 @@ const WinnersTable = ({
                 {row.block}
               </TableCell>
               <TableCell >
-                {row.amount}
+                {row.startDate}
+              </TableCell>
+              <TableCell>
+                {row.endDate}
               </TableCell>
             </TableRow>
           ))}

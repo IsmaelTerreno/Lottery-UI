@@ -12,5 +12,5 @@ export const APP_PATH_DASHBOARD = '/dashboard';
 export const JOB_END_POINT='/api/v1/job';
 export const APP_API_CALL_FAIL = 'APP_API_CALL_FAIL';
 export const CONTRACT_ADDRESS = '0xcDaEDe61c63C840e0a4e78c13f23486852882210';
-export const FORMAT_DATE_TIME = "DD-MM-YYYY h:mm:ss";
+export const FORMAT_DATE_TIME = "DD-MM-YYYY";
 
