@@ -16,16 +16,20 @@ import {
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME } from "./config";
 import { LotteryContract, loginDapp } from "./lib/DappUtils";
+import ehtLogo from './img/ethereum.png'
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    height: '1200px'
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    marginTop:'76px',
+    //backgroundImage: 'linear-gradient(225deg, #23292e 0%, #121314 100%)',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -36,6 +40,32 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  balanceLabel:{
+    color: '#6876e6',
+    fontSize:'70px',
+    marginBottom:'10px',
+    marginTop:'10px',
+  },
+  balanceSymbol:{
+    fontSize:'38px'
+  },
+  ehtLogo:{
+    height: '170px'
+  },
+  balanceSubtitle:{
+    
+  },
+  participateBtn:{
+    borderRadius: '24px',
+    width: '315px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    height: '48px',
+    background: 'linear-gradient(180deg ,#fff, #e5dbff)',
+    color: '#5930ce',
+    fontWeight: 'bold',
+    fontSize: '21px',
+  }
 }));
 
 const App = ({
@@ -48,6 +78,7 @@ const App = ({
   getBalancePrice,
   findLastWinners,
   winners,
+  isAdminRole
 }) => {
   const classes = useStyles();
   return(
@@ -56,7 +87,7 @@ const App = ({
       <div 
         className={classes.root}
       >
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography  
               className={classes.title}
@@ -64,17 +95,24 @@ const App = ({
             >
               { MAIN_APP_NAME }
             </Typography>
-            <Button 
-              color="inherit"
-              onClick={startLottery}
-            >
-              Start lottery
-            </Button>
-            <Button 
-              color="inherit"
-              onClick={pickWinner}>
+            {
+              isAdminRole && 
+              <Button 
+                color="inherit"
+                onClick={startLottery}
+              >
+                Start lottery
+              </Button>
+            }
+            {
+              isAdminRole && 
+              <Button 
+                color="inherit"
+                onClick={pickWinner}
+              >
                 Pick winner
-            </Button>
+              </Button>
+            }
             <Button 
               color="inherit"
               onClick={async ()=>{
@@ -93,23 +131,45 @@ const App = ({
         </AppBar>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography variant="h3" component="h2" gutterBottom>
-                <CountUp end={balancePrice} decimals={2} /> ETH
+            <Paper className={classes.paper}>    
+              <img src={ehtLogo} className={classes.ehtLogo} />
+              <Typography 
+                className={classes.balanceLabel}   
+                variant="h3" 
+                component="h2" 
+                gutterBottom
+              >
+                <CountUp end={balancePrice} decimals={2} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
-              { 
-                lastWinner && 
-                <Typography variant="subtitle1" component="p" gutterBottom>
-                  Last winner address { lastWinner.address }
-                </Typography>
-              }
-              <Button onClick={enterIntoLottery} variant="contained" color="primary">
+              <Typography 
+                className={classes.balanceSubtitle}  
+                variant="h5" 
+                component="h5" 
+                gutterBottom
+              >
+                Current accumulated prize
+              </Typography>
+              <Button 
+                className={classes.participateBtn}  
+                variant="outlined" 
+                onClick={enterIntoLottery} 
+                color="primary"
+              >
                 Participate
               </Button>
             </Paper>
           </Grid>
           <Grid item xs={12}>
+          { 
+            false && lastWinner && 
+            <Typography variant="subtitle1" component="p" gutterBottom>
+              Last winner address { lastWinner.address }
+            </Typography>
+          }
+          {
+            winners.length > 0 && 
             <WinnersTable winners={winners}/>
+          }
           </Grid>
         </Grid>
       </div>
@@ -120,6 +180,7 @@ const App = ({
 App.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
+  isAdminRole: false,
 };
 
 App.propTypes = {

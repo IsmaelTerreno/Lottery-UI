@@ -11,7 +11,6 @@ import {
   TableRow,  
 } from '@material-ui/core';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,7 +31,7 @@ const WinnersTable = ({
   const classes = useStyles();
   return(
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table size="small" className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Start date</TableCell>
