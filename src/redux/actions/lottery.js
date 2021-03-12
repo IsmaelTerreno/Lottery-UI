@@ -52,3 +52,9 @@ export const getBalancePrice = () => {
     type: GET_BALANCE_PRICE
   };
 };
+
+export const loadDappMainData = () => {
+  getBalancePrice();
+  getLastWinner();
+  findLastWinners(); 
+};

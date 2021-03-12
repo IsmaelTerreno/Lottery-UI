@@ -33,14 +33,10 @@ const mapDispatchToProps = dispatch => {
         enterIntoLottery: () => {
             dispatch(enterIntoLottery());
         },
-        findLastWinners: () => {
-            dispatch(findLastWinners());
-        },
-        getLastWinner: () => {
-            dispatch(getLastWinner());
-        },
-        getBalancePrice: () => {
+        loadDappMainData: () => {
             dispatch(getBalancePrice());
+            dispatch(getLastWinner());
+            dispatch(findLastWinners());
         },
     };
 };

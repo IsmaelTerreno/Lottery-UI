@@ -40,7 +40,7 @@ const WinnersTable = ({
             <TableCell>
               <Typography  
                 className={classes.title}
-                variant="p"
+                variant="body2"
               >
                 Profit
               </Typography>
@@ -48,7 +48,7 @@ const WinnersTable = ({
             <TableCell>
               <Typography  
                 className={classes.title}
-                variant="p"
+                variant="body2"
               >
                 Address
               </Typography>
@@ -56,7 +56,7 @@ const WinnersTable = ({
             <TableCell>
               <Typography  
                 className={classes.title}
-                variant="p"
+                variant="body2"
               >
                 Block
               </Typography>
@@ -64,7 +64,7 @@ const WinnersTable = ({
             <TableCell>
               <Typography  
                 className={classes.title}
-                variant="p"
+                variant="body2"
               >
                 Start date
               </Typography>
@@ -72,7 +72,7 @@ const WinnersTable = ({
             <TableCell>
               <Typography  
                 className={classes.title}
-                variant="p"
+                variant="body2"
               >
                 End date
               </Typography>
@@ -92,7 +92,7 @@ const WinnersTable = ({
                   >
                     <Typography  
                       className={classes.title}
-                      variant="p"
+                      variant="body2"
                     >
                       {row.amount}
                     </Typography>
@@ -106,7 +106,7 @@ const WinnersTable = ({
                   >
                     <Typography  
                       className={classes.title}
-                      variant="p"
+                      variant="body2"
                     >
                       {row.address}
                     </Typography>
@@ -120,7 +120,7 @@ const WinnersTable = ({
                   >
                     <Typography  
                       className={classes.title}
-                      variant="p"
+                      variant="body2"
                     >
                       {row.block}
                     </Typography>
@@ -134,7 +134,7 @@ const WinnersTable = ({
                 >
                     <Typography  
                       className={classes.title}
-                      variant="p"
+                      variant="body2"
                     >
                       {row.startDate}
                     </Typography>
@@ -148,7 +148,7 @@ const WinnersTable = ({
                 >
                     <Typography  
                       className={classes.title}
-                      variant="p"
+                      variant="body2"
                     >
                       {row.endDate}
                     </Typography>

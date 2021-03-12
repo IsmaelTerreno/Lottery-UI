@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Provider from 'react-redux/es/components/Provider';
 import './index.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import App from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
@@ -32,7 +33,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <>
+          <CssBaseline/>
+          <App />
+        </>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
