@@ -5,6 +5,7 @@ import contract_abi from '../build/contracts/Lottery.json';
 export let LotteryContract;
 export let web3;
 export let accounts;
+let loginTries = 0;
 
 export const loadDapp = async () => {
   if (window.ethereum) {
@@ -19,6 +20,10 @@ export const loadDapp = async () => {
 
 export const loginDapp = async () => {
   try { 
+    loginTries++;
+    if(loginTries > 1) {
+      window.location.reload();
+    }
     await window.ethereum.request({ method: 'eth_requestAccounts' });
     accounts = await web3.eth.getAccounts();
     // User has allowed account access to DApp...
