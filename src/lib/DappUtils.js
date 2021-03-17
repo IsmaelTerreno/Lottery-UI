@@ -5,31 +5,34 @@ import contract_abi from '../build/contracts/Lottery.json';
 export let LotteryContract;
 export let web3;
 export let accounts;
-let loginTries = 0;
 
-export const loadDapp = async () => {
-  if (window.ethereum) {
-    web3 = new Web3(window.ethereum);
-    window.ethereum.on('accountsChanged', (chainId) => {
-      window.location.reload();
+export const loadDapp = async (callbackFn) => {
+  const { ethereum } = window;
+  if(!ethereum.isConnected()) {
+    window.location.reload();
+  }
+  if ( ethereum ) {
+    ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(()=>{
+      web3 = new Web3(ethereum);
+      accounts = web3.eth.getAccounts();
+      // User has allowed account access to DApp...
+      LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS); 
+      setTimeout(() => {
+        callbackFn();
+      }, 500);
+    })
+    .catch((err) => {
+      if (err.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        // If this happens, the user rejected the connection request.
+        console.log('Please connect to MetaMask.');
+      } else {
+        console.error(err);
+      }
     });
   } else {
     alert('You have to install MetaMask !');
-  }
-}
-
-export const loginDapp = async () => {
-  try { 
-    loginTries++;
-    if(loginTries > 1) {
-      window.location.reload();
-    }
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    accounts = await web3.eth.getAccounts();
-    // User has allowed account access to DApp...
-    LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS);    
-  } catch(e) {
-    // User has denied account access to DApp...
-    // window.location.reload();
   }
 };

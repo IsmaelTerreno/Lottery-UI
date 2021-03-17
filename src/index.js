@@ -6,11 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import App from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
-import { 
-  loadDapp, 
-  // LotteryContract, 
-  // loginDapp 
-} from "./lib/DappUtils";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -20,15 +15,7 @@ const theme = createMuiTheme({
 });
 
 const store = MainStore();
-loadDapp();
-// const checkDappSession = () =>{
-//   setInterval(async() => {
-//     if (!LotteryContract){
-//       loginDapp();
-//     }  
-//   }, 2000);
-// }
-// checkDappSession();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

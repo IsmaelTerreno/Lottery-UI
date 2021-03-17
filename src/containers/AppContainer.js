@@ -13,6 +13,7 @@ import {
     getLastWinnerSelector,
     getBalancePriceSelector,
 } from "../redux/reducers/lottery";
+import { loadDapp } from "../lib/DappUtils";
 
 const mapStateToProps = state => {
     return {
@@ -34,9 +35,11 @@ const mapDispatchToProps = dispatch => {
             dispatch(enterIntoLottery());
         },
         loadDappMainData: () => {
-            dispatch(getBalancePrice());
-            dispatch(getLastWinner());
-            dispatch(findLastWinners());
+            loadDapp(()=>{
+                dispatch(getBalancePrice());
+                dispatch(getLastWinner());
+                dispatch(findLastWinners());
+            });
         },
     };
 };

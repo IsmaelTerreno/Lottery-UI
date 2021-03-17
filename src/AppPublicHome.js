@@ -4,6 +4,7 @@ import './App.css';
 import WinnersTable from "./WinnersTable";
 import 'fontsource-roboto';
 import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { 
   Button,
   Paper,
@@ -14,6 +15,7 @@ import {
 } from '@material-ui/core';
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME } from "./config";
+import { LotteryContract, loginDapp } from "./lib/DappUtils";
 import ehtLogo from './img/ethereum.png'
 
 
@@ -73,7 +75,9 @@ const App = ({
   balancePrice,
   lastWinner,
   enterIntoLottery,
-  loadDappMainData,
+  getLastWinner,
+  getBalancePrice,
+  findLastWinners,
   winners,
   isAdminRole
 }) => {
@@ -108,8 +112,13 @@ const App = ({
           }
           <Button 
             color="inherit"
-            onClick={()=>{
-              loadDappMainData();
+            onClick={async ()=>{
+              await loginDapp();
+              if (LotteryContract){
+                getBalancePrice();
+                getLastWinner();
+                findLastWinners();
+              } 
             }}>
               Use { MAIN_APP_NAME }
           </Button>
@@ -178,7 +187,9 @@ App.propTypes = {
   startLottery: PropTypes.func,
   pickWinner: PropTypes.func,
   enterIntoLottery: PropTypes.func,
-  loadDappMainData: PropTypes.func,
+  getLastWinner: PropTypes.func,
+  getBalancePrice: PropTypes.func,
+  findLastWinners: PropTypes.func,
   winners: PropTypes.array,
 };
 
