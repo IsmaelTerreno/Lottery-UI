@@ -67,7 +67,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const App = ({
+const useToolbarStyles = makeStyles((theme) => ({
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1),
+  },
+  title: {
+    flex: '1 1 100%',
+    textAlign:'center'
+  },
+}));
+
+const Dashboard = ({
   startLottery, 
   pickWinner,
   balancePrice,
@@ -78,6 +89,7 @@ const App = ({
   isAdminRole
 }) => {
   const classes = useStyles();
+  const classesToolbar = useToolbarStyles();
   return(
     <>
       <AppBar position="fixed">
@@ -144,16 +156,18 @@ const App = ({
                 onClick={enterIntoLottery} 
                 color="primary"
               >
-                Participate
+                Buy ticket
               </Button>
             </Paper>
           </Grid>
           <Grid item xs={12}>
           { 
-            false && lastWinner && 
-            <Typography variant="subtitle1" component="p" gutterBottom>
-              Last winner address { lastWinner.address }
-            </Typography>
+            lastWinner && 
+            <Toolbar>
+              <Typography variant="h6" component="h6" className={classesToolbar.title}>
+                Lastest winners
+              </Typography>
+            </Toolbar>
           }
           {
             winners.length > 0 && 
@@ -166,13 +180,13 @@ const App = ({
   );
 }
 
-App.defaultProps = {
+Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
   isAdminRole: false,
 };
 
-App.propTypes = {
+Dashboard.propTypes = {
   balancePrice: PropTypes.number,
   lastWinner: PropTypes.object,
   startLottery: PropTypes.func,
@@ -180,6 +194,7 @@ App.propTypes = {
   enterIntoLottery: PropTypes.func,
   loadDappMainData: PropTypes.func,
   winners: PropTypes.array,
+  isAdminRole: PropTypes.bool,
 };
 
-export default App;
+export default Dashboard;

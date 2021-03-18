@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import App from '../App';
+import Dashboard from '../Dashboard';
 import { 
     findLastWinners,
     startNewLottery,
@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(Dashboard);

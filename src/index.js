@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Provider from 'react-redux/es/components/Provider';
-import './index.css';
+import './index.scss';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import App from './containers/AppContainer';
+import Dashboard from './containers/DashboardContainer';
+import HomePublic from './HomePublic';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -15,6 +16,9 @@ const theme = createMuiTheme({
 });
 
 const store = MainStore();
+const isLoging = () => {
+  return false;
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +26,12 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <>
           <CssBaseline/>
-          <App />
+          { 
+            isLoging() && <Dashboard />
+          }
+          { 
+            !isLoging() && <HomePublic />
+          }
         </>
       </ThemeProvider>
     </Provider>
