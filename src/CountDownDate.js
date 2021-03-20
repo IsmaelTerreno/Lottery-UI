@@ -40,7 +40,7 @@ class CountDownDate extends React.Component {
 	}
 	
 	componentDidMount() {
-		this.interval = setInterval(() => {
+    const processTime = () => {
 			const { timeTillDate, timeFormat } = this.props;
 			const then = moment(timeTillDate, timeFormat);
 			const now = moment();
@@ -51,7 +51,9 @@ class CountDownDate extends React.Component {
 			const seconds = countdown.format('ss');
 
 			this.setState({ days, hours, minutes, seconds });
-		}, 1000);
+		};
+    processTime();
+		this.interval = setInterval(processTime, 1000);
 	}
 
 	componentWillUnmount() {

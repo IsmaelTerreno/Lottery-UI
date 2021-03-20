@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CountUp from 'react-countup';
 import './HomePublic.sass';
 import 'fontsource-roboto';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
   Grid,
   Typography,
-  Paper
+  Paper,
+  Button
 } from '@material-ui/core';
 import FlameAnimation from './FlameAnimation';
 import CountDownDate from './CountDownDate';
+import { MAIN_APP_NAME } from "./config";
+import ehtLogo from './img/ethereum.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,20 +31,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  table: {
-    minWidth: 650,
-  },
-  participateBtn:{
-    borderRadius: '24px',
-    width: '315px',
-    marginTop: '20px',
-    marginBottom: '20px',
-    height: '48px',
-    background: 'linear-gradient(180deg ,#fff, #e5dbff)',
-    color: '#5930ce',
-    fontWeight: 'bold',
-    fontSize: '21px',
-    textTransform: 'capitalize',
+  tableBtn: {
+    marginTop: '5px',
+    marginBottom: '35px',
   },
   logoNameApp1:{
     color: '#45adff',
@@ -51,10 +44,42 @@ const useStyles = makeStyles((theme) => ({
   logoName:{
     textAlign: 'center',
     fontSize: '54px',
-  }
+  },
+  balanceLabel:{
+    color: '#6876e6',
+    fontSize:'70px',
+    marginBottom:'10px',
+    marginTop:'10px',
+    textAlign: 'center',
+  },
+  balanceSymbol:{
+    fontSize:'38px'
+  },
+  ehtLogo:{
+    height: '53px',
+  },
+  balanceTitle:{
+    textAlign: 'center',
+    letterSpacing: '2px',
+	  textTransform: 'uppercase',
+    color: '#ccc',
+    fontSize: '20px',
+  },
+  buyTicketBtn:{
+    height: '53px',
+    color: '#060e22',
+    background: '#fbc509',
+    fontSize: '20px',
+    margin: '0 auto',
+    '&:hover':{
+      background: '#ffcf29',
+      transition: 'all .3s ease-in-out',
+    }
+  },
 }));
 
 const HomePublic = ({
+  balancePrice,
   isAdminRole
 }) => {
   const classes = useStyles();
@@ -63,7 +88,13 @@ const HomePublic = ({
       <div 
         className={classes.root}
       >
-        <Grid container spacing={3}>
+        <Grid 
+          container 
+          spacing={3}             
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <FlameAnimation />
@@ -71,6 +102,38 @@ const HomePublic = ({
                 <span className={classes.logoNameApp1} >CRYPTO</span>  <span className={classes.logoNameApp2}>LOTTERY</span>
               </Typography>
             </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography 
+                variant="h6" 
+                component="h6" 
+                gutterBottom
+                className={classes.balanceTitle}
+              >
+                Current accumulated price
+              </Typography>
+              <Typography 
+                className={classes.balanceLabel}   
+                variant="h3" 
+                component="h2" 
+                gutterBottom
+              >
+                <img alt={MAIN_APP_NAME} src={ehtLogo} className={classes.ehtLogo} />
+                <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
+              </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid 
+              container            
+              direction="row"
+              justify="center"
+              alignItems="center"
+              className={classes.tableBtn}
+            >
+              <Button className={classes.buyTicketBtn} variant="contained" color="primary">
+                Let's buy tickets
+              </Button>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <CountDownDate 
@@ -88,10 +151,12 @@ const HomePublic = ({
 
 HomePublic.defaultProps = {
   isAdminRole: false,
+  balancePrice: 58.89
 };
 
 HomePublic.propTypes = {
   isAdminRole: PropTypes.bool,
+  balancePrice: PropTypes.number,
 };
 
 export default HomePublic;

@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME } from "./config";
-import ehtLogo from './img/ethereum.png'
+import ehtLogo from './img/ethereum.png';
 
 
 const useStyles = makeStyles((theme) => ({
