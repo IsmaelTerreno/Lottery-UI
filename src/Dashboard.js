@@ -118,13 +118,6 @@ const Dashboard = ({
               Pick winner
             </Button>
           }
-          <Button 
-            color="inherit"
-            onClick={()=>{
-              loadDappMainData();
-            }}>
-              Use { MAIN_APP_NAME }
-          </Button>
         </Toolbar>
       </AppBar>
       <div 
