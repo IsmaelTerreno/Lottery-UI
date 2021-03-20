@@ -16,7 +16,9 @@ export const loadDapp = async (callbackFn) => {
     .request({ method: 'eth_requestAccounts' })
     .then(()=>{
       web3 = new Web3(ethereum);
-      accounts = web3.eth.getAccounts();
+      web3.eth.getAccounts().then((walletAccounts)=> {
+        accounts = walletAccounts;        
+      });
       // User has allowed account access to DApp...
       LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS); 
       setTimeout(() => {
@@ -32,6 +34,24 @@ export const loadDapp = async (callbackFn) => {
         console.error(err);
       }
     });
+  } else {
+    alert('You have to install MetaMask !');
+  }
+};
+
+export const loadDappPublic = async (callbackFn) => {
+  const { ethereum } = window;
+  setTimeout(() => {
+    if(!ethereum.isConnected()) {
+      window.location.reload();
+    }
+  }, 300);
+  if ( ethereum ) {
+    web3 = new Web3(ethereum);
+      accounts = ['0x6F8AeEdc26e1B8251bF9E666bEF3C58354448707'];
+      // User has allowed account access to DApp...
+      LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS);
+      callbackFn();
   } else {
     alert('You have to install MetaMask !');
   }
