@@ -51,6 +51,10 @@ function* enterIntoLotterySaga(){
   try{
     yield enterIntoLotteryApi();
     yield put({type: ENTER_INTO_LOTTERY_SUCCESS});
+    const result = yield getBalancePriceApi();
+    yield put({type: GET_BALANCE_PRICE_SUCCESS, balancePrice: result});
+    const result2 = yield getLastWinnersApi();
+    yield put({type: GET_LAST_WINNERS_SUCCESS, winners: result2});
   } catch (e) {
     yield put({type: ENTER_INTO_LOTTERY_FAIL});
     yield put({
