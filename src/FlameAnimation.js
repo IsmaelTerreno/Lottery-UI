@@ -8,7 +8,7 @@ const FlameAnimation = () => {
     <div className="mo-fire">
       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         width="40px" height="40px" viewBox="0 0 185 240" >
-            <circle cx="82" cy="145" r="52" stroke="#45adff" stroke-width="5"  fill="transparent" />
+            <circle cx="82" cy="145" r="52" stroke="#45adff" strokeWidth="5"  fill="transparent" />
             <path className="flame-main" fill="#45adff" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
               c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
               c6.806,41.899,16.831,45.301,6.088,53.985"/>

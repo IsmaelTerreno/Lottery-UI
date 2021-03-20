@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CountUp from 'react-countup';
 import './HomePublic.sass';
@@ -80,9 +80,14 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePublic = ({
   balancePrice,
-  isAdminRole
+  isAdminRole,
+  loadDappMainData,
+  loginToApp,
 }) => {
   const classes = useStyles();
+  useEffect(() => {
+    loadDappMainData();
+  });
   return(
     <>
       <div 
@@ -130,7 +135,7 @@ const HomePublic = ({
               alignItems="center"
               className={classes.tableBtn}
             >
-              <Button className={classes.buyTicketBtn} variant="contained" color="primary">
+              <Button onClick={loginToApp} className={classes.buyTicketBtn} variant="contained" color="primary">
                 Let's buy tickets
               </Button>
             </Grid>
@@ -151,12 +156,15 @@ const HomePublic = ({
 
 HomePublic.defaultProps = {
   isAdminRole: false,
-  balancePrice: 58.89
+  balancePrice: 58.89,
+  loadDappMainData: () => {}
 };
 
 HomePublic.propTypes = {
   isAdminRole: PropTypes.bool,
   balancePrice: PropTypes.number,
+  loadDappMainData:  PropTypes.func,
+  loginToApp: PropTypes.func,
 };
 
 export default HomePublic;

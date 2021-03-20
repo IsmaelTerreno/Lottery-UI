@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Provider from 'react-redux/es/components/Provider';
 import './index.scss';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Dashboard from './containers/DashboardContainer';
-import HomePublic from './HomePublic';
+import App from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { MainStore } from './redux/store/configureStore';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -16,26 +14,13 @@ const theme = createMuiTheme({
 });
 
 const store = MainStore();
-const isLoging = () => {
-  return false;
-};
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <>
-          <CssBaseline/>
-          { 
-            isLoging() && <Dashboard />
-          }
-          { 
-            !isLoging() && <HomePublic />
-          }
-        </>
+        <App />
       </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function

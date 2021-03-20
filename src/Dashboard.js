@@ -183,7 +183,7 @@ const Dashboard = ({
 Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
-  isAdminRole: false,
+  isAdminRole: true,
 };
 
 Dashboard.propTypes = {
