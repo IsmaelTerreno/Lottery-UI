@@ -26,11 +26,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loginToApp: () => {
-            loadDapp(()=>{
+            const loadDashboardData = ()=>{
                 dispatch(setIslogin(true));
                 dispatch(getBalancePrice());
                 dispatch(findLastWinners());
-            });
+            };
+            loadDapp(loadDashboardData, loadDashboardData);
         },
         loadDappMainData: () => {
             loadDappPublic(() => {

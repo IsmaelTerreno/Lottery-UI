@@ -6,7 +6,7 @@ export let LotteryContract;
 export let web3;
 export let accounts;
 
-export const loadDapp = async (callbackFn) => {
+export const loadDapp = async (callbackFn, onAccountsChanged) => {
   const { ethereum } = window;
   if(!ethereum.isConnected()) {
     window.location.reload();
@@ -33,6 +33,13 @@ export const loadDapp = async (callbackFn) => {
       } else {
         console.error(err);
       }
+    });
+    ethereum.on('accountsChanged', (accounts) => {
+      onAccountsChanged();
+    });
+    
+    ethereum.on('chainChanged', (chainId) => {
+      window.location.reload();
     });
   } else {
     alert('You have to install MetaMask !');
