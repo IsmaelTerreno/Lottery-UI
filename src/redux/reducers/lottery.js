@@ -46,6 +46,7 @@ const currentLotteySelector = state => state.lottery.current;
 const winnersListSelector = state => state.lottery.winners;
 const lastWinnerSelector = state => state.lottery.lastWinner;
 const balancePriceSelector = state => state.lottery.balancePrice;
+const lotteryInfoSelector = state => state.lottery.lotteryInfo;
 
 
 export const getCurrentLottey = createSelector(
@@ -66,5 +67,10 @@ export const getLastWinnerSelector = createSelector(
 export const getBalancePriceSelector = createSelector(
   balancePriceSelector,
   balancePrice => balancePrice
+);
+
+export const getLotteryInfoSelector = createSelector(
+  lotteryInfoSelector,
+  lotteryInfo => lotteryInfo
 );
 

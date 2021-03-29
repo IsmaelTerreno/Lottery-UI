@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import FlameAnimation from './FlameAnimation';
 import CountDownDate from './CountDownDate';
-import { MAIN_APP_NAME } from "./config";
+import { MAIN_APP_NAME, LOTTEY_STATE_OPEN, FORMAT_DATE_TIME } from "./config";
 import ehtLogo from './img/ethereum.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,11 +83,12 @@ const HomePublic = ({
   isAdminRole,
   loadDappMainData,
   loginToApp,
+  lotteryInfo,
 }) => {
   const classes = useStyles();
   useEffect(() => {
     loadDappMainData();
-  });
+  },[loadDappMainData]);
   return(
     <>
       <div 
@@ -110,22 +111,22 @@ const HomePublic = ({
           </Grid>
           <Grid item xs={12}>
             <Typography 
-                variant="h6" 
-                component="h6" 
-                gutterBottom
-                className={classes.balanceTitle}
-              >
-                Current accumulated price
-              </Typography>
-              <Typography 
-                className={classes.balanceLabel}   
-                variant="h3" 
-                component="h2" 
-                gutterBottom
-              >
-                <img alt={MAIN_APP_NAME} src={ehtLogo} className={classes.ehtLogo} />
-                <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
-              </Typography>
+              variant="h6" 
+              component="h6" 
+              gutterBottom
+              className={classes.balanceTitle}
+            >
+              Current accumulated price
+            </Typography>
+            <Typography 
+              className={classes.balanceLabel}   
+              variant="h3" 
+              component="h2" 
+              gutterBottom
+            >
+              <img alt={MAIN_APP_NAME} src={ehtLogo} className={classes.ehtLogo} />
+              <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Grid 
@@ -141,9 +142,25 @@ const HomePublic = ({
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <CountDownDate 
-              timeTillDate="05 26 2019, 6:00 am" 
-            />
+          { 
+              lotteryInfo && 
+              lotteryInfo.endDate &&
+              <CountDownDate 
+                timeTillDate={lotteryInfo.endDate}
+                timeFormat={FORMAT_DATE_TIME} 
+              />
+            }
+            {
+              !lotteryInfo &&
+              <Typography 
+                variant="h3" 
+                component="h3" 
+                gutterBottom
+                className={classes.balanceTitle}
+              >
+                Next counter will be ready soon.
+              </Typography>
+            }
           </Grid>
         </Grid>
         <div id="stars"></div>
@@ -156,8 +173,15 @@ const HomePublic = ({
 
 HomePublic.defaultProps = {
   isAdminRole: false,
-  balancePrice: 58.89,
-  loadDappMainData: () => {}
+  balancePrice: 0,
+  loadDappMainData: () => {},
+  lotteryInfo: {
+    state: LOTTEY_STATE_OPEN,
+    startDate: null,
+    endDate: null,
+    enterPrice: 0,
+    balance: 0,
+  }
 };
 
 HomePublic.propTypes = {
@@ -165,6 +189,7 @@ HomePublic.propTypes = {
   balancePrice: PropTypes.number,
   loadDappMainData:  PropTypes.func,
   loginToApp: PropTypes.func,
+  lotteryInfo: PropTypes.object,
 };
 
 export default HomePublic;

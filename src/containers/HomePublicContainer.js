@@ -11,6 +11,7 @@ import {
 import { 
     getWinnersListSelector,
     getBalancePriceSelector,
+    getLotteryInfoSelector,
 } from "../redux/reducers/lottery";
 import { loadDappPublic, loadDapp } from "../lib/DappUtils";
 
@@ -18,6 +19,7 @@ const mapStateToProps = state => {
     return {
         winners: getWinnersListSelector(state),
         balancePrice: getBalancePriceSelector(state),
+        lotteryInfo: getLotteryInfoSelector(state),
     }
 };
   
