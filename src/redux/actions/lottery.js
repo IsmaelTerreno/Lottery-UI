@@ -16,6 +16,9 @@ export const GET_LAST_WINNER_FAIL = 'GET_LAST_WINNER_FAIL';
 export const GET_BALANCE_PRICE = 'GET_BALANCE_PRICE';
 export const GET_BALANCE_PRICE_SUCCESS = 'GET_BALANCE_PRICE_SUCCESS';
 export const GET_BALANCE_PRICE_FAIL = 'GET_BALANCE_PRICE_FAIL';
+export const GET_LOTTERY_INFO = 'GET_LOTTERY_INFO';
+export const GET_LOTTERY_INFO_SUCCESS = 'GET_LOTTERY_INFO_SUCCESS';
+export const GET_LOTTERY_INFO_FAIL = 'GET_LOTTERY_INFO_FAIL';
 
 export const findLastWinners = () => {
   return {
@@ -50,5 +53,11 @@ export const getLastWinner = () => {
 export const getBalancePrice = () => {
   return {
     type: GET_BALANCE_PRICE
+  };
+};
+
+export const getLotteryInfo = () => {
+  return {
+    type: GET_LOTTERY_INFO
   };
 };

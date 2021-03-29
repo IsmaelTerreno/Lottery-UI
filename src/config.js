@@ -8,5 +8,9 @@ export const APP_PATH_ROOT = '/';
 export const APP_API_CALL_FAIL = 'APP_API_CALL_FAIL';
 export const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 export const FORMAT_DATE_TIME = "DD-MM-YYYY";
+export const LOTTEY_STATE_OPEN = 0;
+export const LOTTEY_STATE_CLOSED = 1;
+export const LOTTEY_STATE_CALCULATING_WINNER = 2;
+
 
 

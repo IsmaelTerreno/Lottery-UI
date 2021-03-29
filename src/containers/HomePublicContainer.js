@@ -3,6 +3,7 @@ import HomePublic from '../HomePublic';
 import { 
     getBalancePrice,
     findLastWinners,
+    getLotteryInfo,
 } from "../redux/actions/lottery";
 import { 
     setIslogin,
@@ -32,6 +33,7 @@ const mapDispatchToProps = dispatch => {
         loadDappMainData: () => {
             loadDappPublic(() => {
                 dispatch(getBalancePrice());
+                dispatch(getLotteryInfo());
             });
         },
     };

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { FORMAT_DATE_TIME } from "./config";
+import { FORMAT_DATE_TIME, LOTTEY_STATE_OPEN } from "./config";
 import { LotteryContract, web3, accounts } from "./lib/DappUtils";
 import Chance from 'chance';
 const chance = new Chance();
@@ -51,7 +51,23 @@ export const getBalancePriceApi = async () => {
     } catch (error) {
         return 0;
     }
-};   
+}; 
+
+export const getLotteryInfoApi = async () => {
+    try {
+        const result4 = await LotteryContract.methods.getLotteryInfo().call({ from: accounts[0] });
+        const lotteryState = parseInt(result4[0]);
+        return {
+            state: lotteryState,
+            startDate: (lotteryState === LOTTEY_STATE_OPEN) ? moment(parseInt(result4[1])).format(FORMAT_DATE_TIME) : null,
+            endDate: (lotteryState === LOTTEY_STATE_OPEN) ? moment(parseInt(result4[2])).format(FORMAT_DATE_TIME) : null,
+            enterPrice: parseFloat(web3.utils.fromWei(result4[3], "ether")),
+            balance: parseFloat(web3.utils.fromWei(result4[4], "ether")),
+        };
+    } catch (error) {
+        return null;
+    }
+}; 
 
 
 export const getLastWinnersApi = async () => {

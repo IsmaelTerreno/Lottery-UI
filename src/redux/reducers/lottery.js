@@ -1,7 +1,8 @@
 import {
   GET_LAST_WINNERS_SUCCESS,
   GET_BALANCE_PRICE_SUCCESS,
-  GET_LAST_WINNER_SUCCESS
+  GET_LAST_WINNER_SUCCESS,
+  GET_LOTTERY_INFO_SUCCESS
 } from '../actions/lottery';
 import {createSelector} from 'reselect';
 
@@ -11,6 +12,7 @@ const initState = {
   winners:[],
   lastWinner: null,
   balancePrice: 0,
+  lotteryInfo: null,
 };
 
 export const LoteryReducer = (state = initState, action) => {
@@ -30,7 +32,11 @@ export const LoteryReducer = (state = initState, action) => {
           ...state,
           lastWinner: action.lastWinner
         };
-        
+    case GET_LOTTERY_INFO_SUCCESS:
+      return {
+        ...state,
+        lotteryInfo: action.lotteryInfo
+      };   
     default:
       return state;
   }

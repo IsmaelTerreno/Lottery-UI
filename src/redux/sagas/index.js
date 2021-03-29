@@ -19,6 +19,9 @@ import {
   GET_BALANCE_PRICE,
   GET_BALANCE_PRICE_SUCCESS,
   GET_BALANCE_PRICE_FAIL,
+  GET_LOTTERY_INFO,
+  GET_LOTTERY_INFO_SUCCESS,
+  GET_LOTTERY_INFO_FAIL
 } from '../actions/lottery';
 
 import {
@@ -28,7 +31,7 @@ import {
   getLastWinnerApi,
   getBalancePriceApi,
   getLastWinnersApi,
-
+  getLotteryInfoApi,
 } from '../../api';
 
 import {APP_API_CALL_FAIL} from '../../config';
@@ -121,6 +124,20 @@ function* getBalancePriceSaga(){
   }
 }
 
+function* getLotteryInfoSaga(){
+  try{
+    const result = yield getLotteryInfoApi();
+    yield put({type: GET_LOTTERY_INFO_SUCCESS, lotteryInfo: result});
+  } catch (e) {
+    yield put({type: GET_LOTTERY_INFO_FAIL});
+    yield put({
+      type: APP_API_CALL_FAIL,
+      message: 'Error when get lottery info',
+      err: e.message
+    });
+  }
+}
+
 export function* watchGetLastWinners() {
   yield takeLatest(GET_LAST_WINNERS, getLastWinnersSaga);
 }
@@ -145,6 +162,10 @@ export function* watchGetBalancePrice() {
   yield takeLatest(GET_BALANCE_PRICE, getBalancePriceSaga);
 }
 
+export function* watchGetLotteryInfo() {
+  yield takeLatest(GET_LOTTERY_INFO, getLotteryInfoSaga);
+}
+
 export default function* rootSaga() {
   yield all([
     watchGetLastWinners(),
@@ -152,6 +173,7 @@ export default function* rootSaga() {
     watchStartLottery(),
     watchPickWinner(),
     watchGetLastWinner(),
-    watchGetBalancePrice()
+    watchGetBalancePrice(),
+    watchGetLotteryInfo(),
   ]);
 }
