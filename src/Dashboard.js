@@ -147,7 +147,7 @@ const Dashboard = ({
                 component="h2" 
                 gutterBottom
               >
-                <CountUp end={lotteryInfo.balance} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
+                <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
               <Typography 
                 className={classes.balanceSubtitle}  
@@ -169,7 +169,7 @@ const Dashboard = ({
           </Grid>
           { 
             lotteryInfo && 
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={(countCurrentPositions < 1) ? 12 : 6}>
               <Paper>
                 { 
                   lotteryInfo && 
@@ -186,6 +186,7 @@ const Dashboard = ({
           { 
             lotteryInfo && 
             lotteryInfo.endDate &&
+            countCurrentPositions > 0 &&
             <Grid item xs={12} lg={6}>
               <Paper>
                 <PositionsProbabilityPie
