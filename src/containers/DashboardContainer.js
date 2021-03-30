@@ -7,12 +7,16 @@ import {
     pickWinner,
     getLastWinner,
     getBalancePrice,
+    countCurrentPositions,
+    countAllPositions,
 } from "../redux/actions/lottery";
 import { 
     getWinnersListSelector,
     getLastWinnerSelector,
     getBalancePriceSelector,
     getLotteryInfoSelector,
+    getCountCurrentPositionsSelector,
+    getCountAllPositionSelector,
 } from "../redux/reducers/lottery";
 import { loadDapp } from "../lib/DappUtils";
 
@@ -22,10 +26,19 @@ const mapStateToProps = state => {
         lastWinner: getLastWinnerSelector(state),
         balancePrice: getBalancePriceSelector(state),
         lotteryInfo: getLotteryInfoSelector(state),
+        countCurrentPositions: getCountCurrentPositionsSelector(state),
+        countAllPositions: getCountAllPositionSelector(state),
     }
 };
   
 const mapDispatchToProps = dispatch => {
+    const loadDasboardData = () => {
+        dispatch(getBalancePrice());
+        dispatch(getLastWinner());
+        dispatch(findLastWinners());
+        dispatch(countCurrentPositions());
+        dispatch(countAllPositions());
+    };
     return {
         startLottery: () => {
             dispatch(startNewLottery());
@@ -37,11 +50,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(enterIntoLottery());
         },
         loadDappMainData: () => {
-            loadDapp(()=>{
-                dispatch(getBalancePrice());
-                dispatch(getLastWinner());
-                dispatch(findLastWinners());
-            });
+            loadDapp(loadDasboardData);
         },
     };
 };

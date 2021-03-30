@@ -69,6 +69,25 @@ export const getLotteryInfoApi = async () => {
     }
 }; 
 
+export const countCurrentAddressPositionsApi = async () => {
+    try {
+        const result = await LotteryContract.methods.countCurrentAddressLotteryPositions().call({ from: accounts[0] });
+        return parseInt(result);
+    } catch (error) {
+        return 0;
+    }
+};
+
+export const countAllCurrentPositionsApi = async () => {
+    try {
+        const result = await LotteryContract.methods.countAllCurrentLotteryPositions().call({ from: accounts[0] });
+        return parseInt(result);
+    } catch (error) {
+        return 0;
+    }
+};
+
+
 
 export const getLastWinnersApi = async () => {
     const result4 = await LotteryContract.methods.getLast40Winners().call({ from: accounts[0] });

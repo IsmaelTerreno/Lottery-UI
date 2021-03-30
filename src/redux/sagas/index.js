@@ -21,7 +21,13 @@ import {
   GET_BALANCE_PRICE_FAIL,
   GET_LOTTERY_INFO,
   GET_LOTTERY_INFO_SUCCESS,
-  GET_LOTTERY_INFO_FAIL
+  GET_LOTTERY_INFO_FAIL,
+  COUNT_CURRENT_POSITIONS,
+  COUNT_CURRENT_POSITIONS_SUCCESS,
+  COUNT_CURRENT_POSITIONS_FAIL,
+  COUNT_ALL_POSITIONS,
+  COUNT_ALL_POSITIONS_SUCCESS,
+  COUNT_ALL_POSITIONS_FAIL,
 } from '../actions/lottery';
 
 import {
@@ -32,6 +38,8 @@ import {
   getBalancePriceApi,
   getLastWinnersApi,
   getLotteryInfoApi,
+  countCurrentAddressPositionsApi,
+  countAllCurrentPositionsApi,
 } from '../../api';
 
 import {APP_API_CALL_FAIL} from '../../config';
@@ -138,6 +146,34 @@ function* getLotteryInfoSaga(){
   }
 }
 
+function* countCurrentAddressPositionsSaga(){
+  try{
+    const result = yield countCurrentAddressPositionsApi();
+    yield put({type: COUNT_CURRENT_POSITIONS_SUCCESS, countCurrentPositions: result});
+  } catch (e) {
+    yield put({type: COUNT_CURRENT_POSITIONS_FAIL});
+    yield put({
+      type: APP_API_CALL_FAIL,
+      message: 'Error when get lottery info',
+      err: e.message
+    });
+  }
+}
+
+function* countAllCurrentPositionsSaga(){
+  try{
+    const result = yield countAllCurrentPositionsApi();
+    yield put({type: COUNT_ALL_POSITIONS_SUCCESS, countAllPositions: result});
+  } catch (e) {
+    yield put({type: COUNT_ALL_POSITIONS_FAIL});
+    yield put({
+      type: APP_API_CALL_FAIL,
+      message: 'Error when get lottery info',
+      err: e.message
+    });
+  }
+}
+
 export function* watchGetLastWinners() {
   yield takeLatest(GET_LAST_WINNERS, getLastWinnersSaga);
 }
@@ -166,6 +202,14 @@ export function* watchGetLotteryInfo() {
   yield takeLatest(GET_LOTTERY_INFO, getLotteryInfoSaga);
 }
 
+export function* watchCountCurrentAddressPositions() {
+  yield takeLatest(COUNT_CURRENT_POSITIONS, countCurrentAddressPositionsSaga);
+}
+
+export function* watchCountAllCurrentPositions() {
+  yield takeLatest(COUNT_ALL_POSITIONS, countAllCurrentPositionsSaga);
+}
+
 export default function* rootSaga() {
   yield all([
     watchGetLastWinners(),
@@ -175,5 +219,7 @@ export default function* rootSaga() {
     watchGetLastWinner(),
     watchGetBalancePrice(),
     watchGetLotteryInfo(),
+    watchCountCurrentAddressPositions(),
+    watchCountAllCurrentPositions(),
   ]);
 }

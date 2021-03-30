@@ -74,7 +74,7 @@ class CountDownDate extends React.Component {
 		}
 		
 		return (
-			<div className="countdown-main">
+			<div className={"countdown-main " + this.props.classNameCustom}>
 				<h1 className="countdown-title">Next draw countdown</h1>
 				<div className='countdown-wrapper'>
 					{days && (
@@ -124,6 +124,7 @@ CountDownDate.defaultProps = {
 CountDownDate.propTypes = {
   timeTillDate: PropTypes.string,
   timeFormat: PropTypes.string,
+  classNameCustom: PropTypes.string,
 };
 
 export default CountDownDate;

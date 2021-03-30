@@ -142,7 +142,7 @@ const HomePublic = ({
             </Grid>
           </Grid>
           <Grid item xs={12}>
-          { 
+            { 
               lotteryInfo && 
               lotteryInfo.endDate &&
               <CountDownDate 

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import WinnersTable from "./WinnersTable";
 import PositionsProbabilityPie from './PositionsProbabilityPie';
 import 'fontsource-roboto';
+import CountDownDate from './CountDownDate';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
   Button,
@@ -14,7 +15,7 @@ import {
   Toolbar, 
 } from '@material-ui/core';
 import CountUp from 'react-countup';
-import { MAIN_APP_NAME } from "./config";
+import { MAIN_APP_NAME, FORMAT_DATE_TIME } from "./config";
 import ehtLogo from './img/ethereum.png';
 
 
@@ -65,7 +66,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '21px',
     textTransform: 'capitalize',
-  }
+  },
+  countDownDate:{
+    height: '300px',
+    '& .countdown-wrapper':{
+      marginTop:'50px'
+    }  
+  },
 }));
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -87,10 +94,16 @@ const Dashboard = ({
   enterIntoLottery,
   loadDappMainData,
   winners,
-  isAdminRole
+  isAdminRole,
+  lotteryInfo,
+  countCurrentPositions,
+  countAllPositions,
 }) => {
   const classes = useStyles();
   const classesToolbar = useToolbarStyles();
+  useEffect(() => {
+    loadDappMainData();
+  },[loadDappMainData]);
   return(
     <>
       <AppBar position="fixed">
@@ -134,7 +147,7 @@ const Dashboard = ({
                 component="h2" 
                 gutterBottom
               >
-                <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
+                <CountUp end={lotteryInfo.balance} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
               <Typography 
                 className={classes.balanceSubtitle}  
@@ -154,28 +167,47 @@ const Dashboard = ({
               </Button>
             </Paper>
           </Grid>
-          <Grid item xs={12}>
-            <Paper>
-              <PositionsProbabilityPie
-                countPosition={2}
-                totalPositions={5}
-              />
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            { 
-              lastWinner && 
-              <Toolbar>
-                <Typography variant="h6" component="h6" className={classesToolbar.title}>
-                  Lastest winners
-                </Typography>
-              </Toolbar>
-            }
-            {
-              winners.length > 0 && 
-              <WinnersTable winners={winners}/>
-            }
-          </Grid>
+          { 
+            lotteryInfo && 
+            <Grid item xs={6}>
+              <Paper>
+                { 
+                  lotteryInfo && 
+                  lotteryInfo.endDate &&
+                  <CountDownDate 
+                    timeTillDate={lotteryInfo.endDate}
+                    timeFormat={FORMAT_DATE_TIME} 
+                    classNameCustom={classes.countDownDate}
+                  />
+                }
+              </Paper>
+            </Grid> 
+          }
+          { 
+            lotteryInfo && 
+            <Grid item xs={6}>
+              <Paper>
+                <PositionsProbabilityPie
+                  countPosition={countCurrentPositions}
+                  totalPositions={countAllPositions - countCurrentPositions}
+                />
+              </Paper>
+            </Grid> 
+          }
+          {
+            lastWinner &&
+            winners.length > 0 &&
+            <Grid item xs={12}>
+              <Paper>
+                  <Toolbar>
+                    <Typography variant="h6" component="h6" className={classesToolbar.title}>
+                      Lastest winners
+                    </Typography>
+                  </Toolbar>
+                  <WinnersTable winners={winners}/>
+              </Paper>
+            </Grid>
+          }
         </Grid>
       </div>
     </>
@@ -186,6 +218,11 @@ Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
   isAdminRole: true,
+  lotteryInfo: {
+    balance: 0,
+  },
+  countCurrentPositions: 0,
+  countAllPositions: 0
 };
 
 Dashboard.propTypes = {
@@ -197,6 +234,9 @@ Dashboard.propTypes = {
   loadDappMainData: PropTypes.func,
   winners: PropTypes.array,
   isAdminRole: PropTypes.bool,
+  lotteryInfo: PropTypes.object,
+  countCurrentPositions: PropTypes.number,
+  countAllPositions: PropTypes.number,
 };
 
 export default Dashboard;

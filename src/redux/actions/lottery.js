@@ -19,6 +19,12 @@ export const GET_BALANCE_PRICE_FAIL = 'GET_BALANCE_PRICE_FAIL';
 export const GET_LOTTERY_INFO = 'GET_LOTTERY_INFO';
 export const GET_LOTTERY_INFO_SUCCESS = 'GET_LOTTERY_INFO_SUCCESS';
 export const GET_LOTTERY_INFO_FAIL = 'GET_LOTTERY_INFO_FAIL';
+export const COUNT_CURRENT_POSITIONS = 'COUNT_CURRENT_POSITIONS';
+export const COUNT_CURRENT_POSITIONS_SUCCESS = 'COUNT_CURRENT_POSITIONS_SUCCESS';
+export const COUNT_CURRENT_POSITIONS_FAIL = 'COUNT_CURRENT_POSITIONS_FAIL';
+export const COUNT_ALL_POSITIONS = 'COUNT_ALL_POSITIONS';
+export const COUNT_ALL_POSITIONS_SUCCESS = 'COUNT_ALL_POSITIONS_SUCCESS';
+export const COUNT_ALL_POSITIONS_FAIL = 'COUNT_ALL_POSITIONS_FAIL';
 
 export const findLastWinners = () => {
   return {
@@ -59,5 +65,17 @@ export const getBalancePrice = () => {
 export const getLotteryInfo = () => {
   return {
     type: GET_LOTTERY_INFO
+  };
+};
+
+export const countCurrentPositions = () => {
+  return {
+    type: COUNT_CURRENT_POSITIONS
+  };
+};
+
+export const countAllPositions = () => {
+  return {
+    type: COUNT_ALL_POSITIONS
   };
 };

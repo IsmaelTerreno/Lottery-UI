@@ -2,7 +2,9 @@ import {
   GET_LAST_WINNERS_SUCCESS,
   GET_BALANCE_PRICE_SUCCESS,
   GET_LAST_WINNER_SUCCESS,
-  GET_LOTTERY_INFO_SUCCESS
+  GET_LOTTERY_INFO_SUCCESS,
+  COUNT_CURRENT_POSITIONS_SUCCESS,
+  COUNT_ALL_POSITIONS_SUCCESS,
 } from '../actions/lottery';
 import {createSelector} from 'reselect';
 
@@ -13,6 +15,8 @@ const initState = {
   lastWinner: null,
   balancePrice: 0,
   lotteryInfo: null,
+  countCurrentPositions: 0,
+  countAllPositions:0,
 };
 
 export const LoteryReducer = (state = initState, action) => {
@@ -36,6 +40,16 @@ export const LoteryReducer = (state = initState, action) => {
       return {
         ...state,
         lotteryInfo: action.lotteryInfo
+      }; 
+    case COUNT_CURRENT_POSITIONS_SUCCESS:
+      return {
+        ...state,
+        countCurrentPositions: action.countCurrentPositions
+      };
+    case COUNT_ALL_POSITIONS_SUCCESS:
+      return {
+        ...state,
+        countAllPositions: action.countAllPositions
       };   
     default:
       return state;
@@ -47,6 +61,8 @@ const winnersListSelector = state => state.lottery.winners;
 const lastWinnerSelector = state => state.lottery.lastWinner;
 const balancePriceSelector = state => state.lottery.balancePrice;
 const lotteryInfoSelector = state => state.lottery.lotteryInfo;
+const countCurrentPositionsSelector = state => state.lottery.countCurrentPositions;
+const countAllPositionsSelector = state => state.lottery.countAllPositions;
 
 
 export const getCurrentLottey = createSelector(
@@ -74,3 +90,12 @@ export const getLotteryInfoSelector = createSelector(
   lotteryInfo => lotteryInfo
 );
 
+export const getCountCurrentPositionsSelector = createSelector(
+  countCurrentPositionsSelector,
+  countCurrentPositions => countCurrentPositions
+);
+
+export const getCountAllPositionSelector = createSelector(
+  countAllPositionsSelector,
+  countAllPositions => countAllPositions
+);
