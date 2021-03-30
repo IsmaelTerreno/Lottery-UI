@@ -218,7 +218,7 @@ const Dashboard = ({
 Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
-  isAdminRole: false,
+  isAdminRole: true,
   lotteryInfo: {
     balance: 0,
   },

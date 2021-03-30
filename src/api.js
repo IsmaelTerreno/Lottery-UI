@@ -87,7 +87,20 @@ export const countAllCurrentPositionsApi = async () => {
     }
 };
 
-
+export const newPlayerTickectAddedEventApi = async (fnSubscriptionCallback) => {
+    try {
+        await LotteryContract.events.NewPlayerTickectAdded()
+        .on('data', (event) =>{
+            fnSubscriptionCallback(event);
+        })
+        .on('changed', function(event){
+            // remove event from local database
+        })
+        .on('error', console.error);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 export const getLastWinnersApi = async () => {
     const result4 = await LotteryContract.methods.getLast40Winners().call({ from: accounts[0] });
