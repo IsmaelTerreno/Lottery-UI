@@ -185,6 +185,7 @@ const Dashboard = ({
           }
           { 
             lotteryInfo && 
+            lotteryInfo.endDate &&
             <Grid item xs={6}>
               <Paper>
                 <PositionsProbabilityPie
