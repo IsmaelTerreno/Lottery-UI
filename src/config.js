@@ -1,4 +1,4 @@
-export const MAIN_APP_NAME = 'Crypto Lottery';
+export const MAIN_APP_NAME = 'Blue Flame';
 export const STATUS_401_ERROR_MESSAGE='Calls to the API return 401 Unauthorized';
 export const STATUS_400_ERROR_MESSAGE='Calls to the API return 400 Bad Request';
 export const STATUS_403_ERROR_MESSAGE='Calls to the API return 403 Forbidden';

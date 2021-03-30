@@ -169,7 +169,7 @@ const Dashboard = ({
           </Grid>
           { 
             lotteryInfo && 
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={6}>
               <Paper>
                 { 
                   lotteryInfo && 
@@ -186,7 +186,7 @@ const Dashboard = ({
           { 
             lotteryInfo && 
             lotteryInfo.endDate &&
-            <Grid item xs={6}>
+            <Grid item xs={12} lg={6}>
               <Paper>
                 <PositionsProbabilityPie
                   countPosition={countCurrentPositions}
@@ -218,7 +218,7 @@ const Dashboard = ({
 Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
-  isAdminRole: true,
+  isAdminRole: false,
   lotteryInfo: {
     balance: 0,
   },

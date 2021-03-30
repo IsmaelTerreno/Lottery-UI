@@ -108,7 +108,7 @@ const WinnersTable = ({
                       className={classes.title}
                       variant="body2"
                     >
-                      {row.address}
+                      { row.address.substr(0, 5) +'....'+ row.address.substr(row.address.split('').length - 6, row.address.split('').length - 1)}
                     </Typography>
                 </Grow>
               </TableCell>

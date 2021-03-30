@@ -105,7 +105,7 @@ const HomePublic = ({
             <Paper className={classes.paper}>
               <FlameAnimation />
               <Typography variant="h1" component="h1" className={classes.logoName}>
-                <span className={classes.logoNameApp1} >CRYPTO</span>  <span className={classes.logoNameApp2}>LOTTERY</span>
+                <span className={classes.logoNameApp1} >Blue</span>  <span className={classes.logoNameApp2}>Flame</span>
               </Typography>
             </Paper>
           </Grid>
