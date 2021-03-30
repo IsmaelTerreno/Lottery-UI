@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => {
                 dispatch(getBalancePrice());
                 dispatch(findLastWinners());
             };
-            loadDapp(loadDashboardData, loadDashboardData);
+            loadDapp(loadDashboardData);
         },
         loadDappMainData: () => {
             loadDappPublic(() => {

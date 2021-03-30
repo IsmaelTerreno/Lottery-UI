@@ -6,7 +6,7 @@ export let LotteryContract;
 export let web3;
 export let accounts;
 
-export const loadDapp = async (callbackFn, onAccountsChanged) => {
+export const loadDapp = async (callbackFn) => {
   const { ethereum } = window;
   if(!ethereum.isConnected()) {
     window.location.reload();
@@ -35,7 +35,9 @@ export const loadDapp = async (callbackFn, onAccountsChanged) => {
       }
     });
     ethereum.on('accountsChanged', (accounts) => {
-      onAccountsChanged();
+      setTimeout(() => {
+        callbackFn();
+      }, 500);
     });
     
     ethereum.on('chainChanged', (chainId) => {

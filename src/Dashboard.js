@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import WinnersTable from "./WinnersTable";
+import PositionsProbabilityPie from './PositionsProbabilityPie';
 import 'fontsource-roboto';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
@@ -154,18 +155,26 @@ const Dashboard = ({
             </Paper>
           </Grid>
           <Grid item xs={12}>
-          { 
-            lastWinner && 
-            <Toolbar>
-              <Typography variant="h6" component="h6" className={classesToolbar.title}>
-                Lastest winners
-              </Typography>
-            </Toolbar>
-          }
-          {
-            winners.length > 0 && 
-            <WinnersTable winners={winners}/>
-          }
+            <Paper>
+              <PositionsProbabilityPie
+                countPosition={2}
+                totalPositions={5}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            { 
+              lastWinner && 
+              <Toolbar>
+                <Typography variant="h6" component="h6" className={classesToolbar.title}>
+                  Lastest winners
+                </Typography>
+              </Toolbar>
+            }
+            {
+              winners.length > 0 && 
+              <WinnersTable winners={winners}/>
+            }
           </Grid>
         </Grid>
       </div>

@@ -113,7 +113,7 @@ class CountDownDate extends React.Component {
 
 const SVGCircle = ({ radius }) => (
 	<svg className='countdown-svg'>
-		<path fill="none" stroke="#333" stroke-width="4" d={describeArc(50, 50, 48, 0, radius)}/>
+		<path fill="none" stroke="#333" strokeWidth="4" d={describeArc(50, 50, 48, 0, radius)}/>
 	</svg>
 );
 
