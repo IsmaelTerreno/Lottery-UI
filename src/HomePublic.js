@@ -116,7 +116,7 @@ const HomePublic = ({
               gutterBottom
               className={classes.balanceTitle}
             >
-              Current accumulated price
+              Current prize
             </Typography>
             <Typography 
               className={classes.balanceLabel}   
