@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     height: '170px'
   },
   balanceSubtitle:{
-    
+    fontSize: '20px',
   },
   participateBtn:{
     borderRadius: '24px',
@@ -72,6 +72,19 @@ const useStyles = makeStyles((theme) => ({
     '& .countdown-wrapper':{
       marginTop:'50px'
     }  
+  },
+  buyTicketBtn:{
+    height: '53px',
+    color: '#060e22',
+    background: '#fbc509',
+    fontSize: '20px',
+    margin: '0 auto',
+    '&:hover':{
+      background: '#ffcf29',
+      transition: 'all .3s ease-in-out',
+    },
+    marginBottom:'18px',
+    marginTop: '18px',
   },
 }));
 
@@ -142,6 +155,14 @@ const Dashboard = ({
             <Paper className={classes.paper}>    
               <img alt={MAIN_APP_NAME} src={ehtLogo} className={classes.ehtLogo} />
               <Typography 
+                className={classes.balanceSubtitle}  
+                variant="h5" 
+                component="h5" 
+                gutterBottom
+              >
+                Current prize
+              </Typography>
+              <Typography 
                 className={classes.balanceLabel}   
                 variant="h3" 
                 component="h2" 
@@ -149,19 +170,12 @@ const Dashboard = ({
               >
                 <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
-              <Typography 
-                className={classes.balanceSubtitle}  
-                variant="h5" 
-                component="h5" 
-                gutterBottom
-              >
-                Current accumulated prize
-              </Typography>
               <Button 
-                className={classes.participateBtn}  
-                variant="outlined" 
-                onClick={enterIntoLottery} 
+                className={classes.buyTicketBtn} 
+                variant="contained" 
                 color="primary"
+                onClick={enterIntoLottery} 
+                
               >
                 Buy ticket
               </Button>

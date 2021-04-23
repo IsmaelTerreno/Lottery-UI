@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  title:{
+    textAlign: 'center',
+  }
 }));
 
 const WinnersTable = ({
