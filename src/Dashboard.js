@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import WinnersTable from "./WinnersTable";
@@ -17,6 +17,7 @@ import {
 import CountUp from 'react-countup';
 import { MAIN_APP_NAME, FORMAT_DATE_TIME } from "./config";
 import ehtLogo from './img/ethereum.png';
+import Tour from "reactour";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -117,6 +118,38 @@ const Dashboard = ({
   useEffect(() => {
     loadDappMainData();
   },[loadDappMainData]);
+  const [ isTourOpen, setIsTourOpen ] = useState(true);
+  const tutorialStyle= {
+    color: '#060e22',
+  };
+  const steps = [
+    {
+      selector: '[data-tut="current-prize-dasboard"]',
+      content: ()=>(
+        <Typography
+          variant="body2" 
+          component="p" 
+          gutterBottom
+          style={tutorialStyle}
+        >
+          This is the current prize and will increase as people join the ticket pool.
+        </Typography>
+      ),
+    },
+    {
+      selector: '[data-tut="buy-ticket-dasboard"]',
+      content: ()=>(
+        <Typography 
+          style={tutorialStyle}
+          variant="body2" 
+          component="p" 
+          gutterBottom
+        >
+          Buy tickets to have more probability to win the current prize, it fast and incredibly easy!
+        </Typography>
+      ),
+    },
+  ]
   return(
     <>
       <AppBar position="fixed">
@@ -167,6 +200,7 @@ const Dashboard = ({
                 variant="h3" 
                 component="h2" 
                 gutterBottom
+                data-tut="current-prize-dasboard"
               >
                 <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
@@ -175,7 +209,7 @@ const Dashboard = ({
                 variant="contained" 
                 color="primary"
                 onClick={enterIntoLottery} 
-                
+                data-tut="buy-ticket-dasboard"
               >
                 Buy ticket
               </Button>
@@ -226,6 +260,10 @@ const Dashboard = ({
           }
         </Grid>
       </div>
+      <Tour
+        steps={steps}
+        isOpen={isTourOpen}
+        onRequestClose={()=> setIsTourOpen(false)} />
     </>
   );
 }

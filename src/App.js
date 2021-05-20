@@ -11,8 +11,8 @@ const App = ({
   return (
     <>
       <CssBaseline/>
-        { isLogin && <Dashboard /> }
-        { !isLogin && <HomePublic /> }
+      { isLogin && <Dashboard /> }
+      { !isLogin && <HomePublic /> }
     </>
   );
 }
