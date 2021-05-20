@@ -149,6 +149,19 @@ const Dashboard = ({
         </Typography>
       ),
     },
+    {
+      selector: '[data-tut="countdown-draw-dasboard"]',
+      content: ()=>(
+        <Typography 
+          style={tutorialStyle}
+          variant="body2" 
+          component="p" 
+          gutterBottom
+        >
+          This is the next countdown draw to receive the current current prize, it will reset after every draw done.
+        </Typography>
+      ),
+    },
   ]
   return(
     <>
@@ -218,7 +231,7 @@ const Dashboard = ({
           { 
             lotteryInfo && 
             <Grid item xs={12} lg={(countCurrentPositions < 1) ? 12 : 6}>
-              <Paper>
+              <Paper data-tut="countdown-draw-dasboard">
                 { 
                   lotteryInfo && 
                   lotteryInfo.endDate &&
