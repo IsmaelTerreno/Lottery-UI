@@ -145,7 +145,7 @@ const Dashboard = ({
           component="p" 
           gutterBottom
         >
-          Buy tickets to have more probability to win the current prize, it fast and incredibly easy!
+          Buy tickets to have a better chance of winning the current prize, it's fast and incredibly easy!
         </Typography>
       ),
     },
@@ -159,6 +159,32 @@ const Dashboard = ({
           gutterBottom
         >
           This is the next countdown draw to receive the current current prize, it will reset after every draw done.
+        </Typography>
+      ),
+    },
+    {
+      selector: '[data-tut="tickets-section-dasboard"]',
+      content: ()=>(
+        <Typography 
+          style={tutorialStyle}
+          variant="body2" 
+          component="p" 
+          gutterBottom
+        >
+          Here is information about how many tickets you have and the chance of winning based on your buyed tickets. 
+        </Typography>
+      ),
+    },
+    {
+      selector: '[data-tut="lastest-winners-dasboard"]',
+      content: ()=>(
+        <Typography 
+          style={tutorialStyle}
+          variant="body2" 
+          component="p" 
+          gutterBottom
+        >
+          This is the information of the last lucky winners registered in the blockchain where it will always be updated for each draw.
         </Typography>
       ),
     },
@@ -249,7 +275,7 @@ const Dashboard = ({
             lotteryInfo.endDate &&
             countCurrentPositions > 0 &&
             <Grid item xs={12} lg={6}>
-              <Paper>
+              <Paper data-tut="tickets-section-dasboard">
                 <PositionsProbabilityPie
                   countPosition={countCurrentPositions}
                   totalPositions={countAllPositions - countCurrentPositions}
@@ -260,7 +286,7 @@ const Dashboard = ({
           {
             lastWinner &&
             winners.length > 0 &&
-            <Grid item xs={12}>
+            <Grid item xs={12} data-tut="lastest-winners-dasboard">
               <Paper>
                   <Toolbar>
                     <Typography variant="h6" component="h6" className={classesToolbar.title}>
