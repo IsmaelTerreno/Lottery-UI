@@ -256,7 +256,7 @@ const Dashboard = ({
           </Grid>
           { 
             lotteryInfo && 
-            <Grid item xs={12} lg={(countCurrentPositions < 1) ? 12 : 6}>
+            <Grid item xs={12} lg={6}>
               <Paper data-tut="countdown-draw-dashboard">
                 { 
                   lotteryInfo && 
@@ -273,7 +273,6 @@ const Dashboard = ({
           { 
             lotteryInfo && 
             lotteryInfo.endDate &&
-            countCurrentPositions > 0 &&
             <Grid item xs={12} lg={6}>
               <Paper data-tut="tickets-section-dashboard">
                 <PositionsProbabilityPie
