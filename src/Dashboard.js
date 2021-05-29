@@ -171,7 +171,7 @@ const Dashboard = ({
           component="p" 
           gutterBottom
         >
-          Here is information about how many tickets you have and the chance of winning based on your buyed tickets. 
+          Here's information on how many tickets you have and your chances of winning based on your purchased tickets.
         </Typography>
       ),
     },
@@ -289,7 +289,7 @@ const Dashboard = ({
               <Paper>
                   <Toolbar>
                     <Typography variant="h6" component="h6" className={classesToolbar.title}>
-                      latest winners
+                      Latest Winners
                     </Typography>
                   </Toolbar>
                   <WinnersTable winners={winners}/>
