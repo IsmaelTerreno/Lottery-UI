@@ -124,7 +124,7 @@ const Dashboard = ({
   };
   const steps = [
     {
-      selector: '[data-tut="current-prize-dasboard"]',
+      selector: '[data-tut="current-prize-dashboard"]',
       content: ()=>(
         <Typography
           variant="body2" 
@@ -137,7 +137,7 @@ const Dashboard = ({
       ),
     },
     {
-      selector: '[data-tut="buy-ticket-dasboard"]',
+      selector: '[data-tut="buy-ticket-dashboard"]',
       content: ()=>(
         <Typography 
           style={tutorialStyle}
@@ -150,7 +150,7 @@ const Dashboard = ({
       ),
     },
     {
-      selector: '[data-tut="countdown-draw-dasboard"]',
+      selector: '[data-tut="countdown-draw-dashboard"]',
       content: ()=>(
         <Typography 
           style={tutorialStyle}
@@ -163,7 +163,7 @@ const Dashboard = ({
       ),
     },
     {
-      selector: '[data-tut="tickets-section-dasboard"]',
+      selector: '[data-tut="tickets-section-dashboard"]',
       content: ()=>(
         <Typography 
           style={tutorialStyle}
@@ -176,7 +176,7 @@ const Dashboard = ({
       ),
     },
     {
-      selector: '[data-tut="lastest-winners-dasboard"]',
+      selector: '[data-tut="latest-winners-dashboard"]',
       content: ()=>(
         <Typography 
           style={tutorialStyle}
@@ -239,7 +239,7 @@ const Dashboard = ({
                 variant="h3" 
                 component="h2" 
                 gutterBottom
-                data-tut="current-prize-dasboard"
+                data-tut="current-prize-dashboard"
               >
                 <CountUp end={balancePrice} decimals={8} /> <span className={classes.balanceSymbol} >ETH</span> 
               </Typography>
@@ -248,7 +248,7 @@ const Dashboard = ({
                 variant="contained" 
                 color="primary"
                 onClick={enterIntoLottery} 
-                data-tut="buy-ticket-dasboard"
+                data-tut="buy-ticket-dashboard"
               >
                 Buy ticket
               </Button>
@@ -257,7 +257,7 @@ const Dashboard = ({
           { 
             lotteryInfo && 
             <Grid item xs={12} lg={(countCurrentPositions < 1) ? 12 : 6}>
-              <Paper data-tut="countdown-draw-dasboard">
+              <Paper data-tut="countdown-draw-dashboard">
                 { 
                   lotteryInfo && 
                   lotteryInfo.endDate &&
@@ -275,7 +275,7 @@ const Dashboard = ({
             lotteryInfo.endDate &&
             countCurrentPositions > 0 &&
             <Grid item xs={12} lg={6}>
-              <Paper data-tut="tickets-section-dasboard">
+              <Paper data-tut="tickets-section-dashboard">
                 <PositionsProbabilityPie
                   countPosition={countCurrentPositions}
                   totalPositions={countAllPositions - countCurrentPositions}
@@ -286,11 +286,11 @@ const Dashboard = ({
           {
             lastWinner &&
             winners.length > 0 &&
-            <Grid item xs={12} data-tut="lastest-winners-dasboard">
+            <Grid item xs={12} data-tut="latest-winners-dashboard">
               <Paper>
                   <Toolbar>
                     <Typography variant="h6" component="h6" className={classesToolbar.title}>
-                      Lastest winners
+                      latest winners
                     </Typography>
                   </Toolbar>
                   <WinnersTable winners={winners}/>

@@ -1,4 +1,4 @@
-import { CONTRACT_ADDRESS } from '../config';
+import {CONTRACT_ADDRESS, REACT_APP_ANONYMOUS_ADDRESS_FOR_READS} from '../config';
 import Web3 from 'web3';
 import contract_abi from '../build/contracts/Lottery.json';
 
@@ -51,13 +51,13 @@ export const loadDapp = async (callbackFn) => {
 export const loadDappPublic = async (callbackFn) => {
   const { ethereum } = window;
   setTimeout(() => {
-    if(!ethereum.isConnected()) {
+    if(ethereum && !ethereum.isConnected()) {
       window.location.reload();
     }
   }, 300);
   if ( ethereum ) {
     web3 = new Web3(ethereum);
-      accounts = ['0x6F8AeEdc26e1B8251bF9E666bEF3C58354448707'];
+      accounts = [REACT_APP_ANONYMOUS_ADDRESS_FOR_READS];
       // User has allowed account access to DApp...
       LotteryContract = new web3.eth.Contract(contract_abi.abi, CONTRACT_ADDRESS);
       callbackFn();
