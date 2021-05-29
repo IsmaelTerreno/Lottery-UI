@@ -18,7 +18,7 @@ import CountUp from 'react-countup';
 import { MAIN_APP_NAME, FORMAT_DATE_TIME } from "./config";
 import ehtLogo from './img/ethereum.png';
 import Tour from "reactour";
-
+import HelpIcon from '@material-ui/icons/Help';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,6 +86,12 @@ const useStyles = makeStyles((theme) => ({
     },
     marginBottom:'18px',
     marginTop: '18px',
+  },
+  helpTourBtn:{
+    '&:hover':{
+      cursor: 'pointer',
+      transition: 'all .3s ease-in-out',
+    },
   },
 }));
 
@@ -217,6 +223,10 @@ const Dashboard = ({
               Pick winner
             </Button>
           }
+          <HelpIcon
+            className={classes.helpTourBtn}
+            onClick={()=> setIsTourOpen(true)}
+          />
         </Toolbar>
       </AppBar>
       <div 
@@ -309,7 +319,7 @@ const Dashboard = ({
 Dashboard.defaultProps = {
   balancePrice: 0,
   lastWinner: null,
-  isAdminRole: true,
+  isAdminRole: false,
   lotteryInfo: {
     balance: 0,
   },
