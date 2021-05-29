@@ -188,7 +188,7 @@ const Dashboard = ({
         </Typography>
       ),
     },
-  ]
+  ];
   return(
     <>
       <AppBar position="fixed">
