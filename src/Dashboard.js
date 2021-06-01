@@ -183,12 +183,18 @@ const Dashboard = ({
     },
     {
       selector: '[data-tut="latest-winners-dashboard"]',
-      content: ()=>(
+      content: ({goTo})=>(
         <Typography 
           style={tutorialStyle}
           variant="body2" 
           component="p" 
           gutterBottom
+          onClick={()=>{
+            if(isTourOpen){
+              goTo(1);
+              setIsTourOpen(false);
+            }
+          }}
         >
           This is the information of the last lucky winners registered in the blockchain where it will always be updated for each draw.
         </Typography>
