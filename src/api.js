@@ -87,9 +87,9 @@ export const countAllCurrentPositionsApi = async () => {
     }
 };
 
-export const newPlayerTickectAddedEventApi = async (fnSubscriptionCallback) => {
+export const newPlayerTicketAddedEventApi = async (fnSubscriptionCallback) => {
     try {
-        await LotteryContract.events.NewPlayerTickectAdded()
+        await LotteryContract.events.NewPlayerTicketAdded()
         .on('data', (event) =>{
             fnSubscriptionCallback(event);
         })

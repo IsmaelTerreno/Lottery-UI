@@ -19,7 +19,7 @@ import {
     getCountAllPositionSelector,
 } from "../redux/reducers/lottery";
 import { loadDapp } from "../lib/DappUtils";
-import { newPlayerTickectAddedEventApi } from "../api";
+import { newPlayerTicketAddedEventApi } from "../api";
 
 
 const mapStateToProps = state => {
@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(countCurrentPositions());
         dispatch(countAllPositions());
     };
-    newPlayerTickectAddedEventApi((event)=>{
+    newPlayerTicketAddedEventApi((event)=>{
         loadDasboardData();
     });
     return {
