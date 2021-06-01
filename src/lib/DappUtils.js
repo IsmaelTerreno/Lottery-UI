@@ -36,7 +36,7 @@ export const loadDapp = async (callbackFn) => {
     });
     ethereum.on('accountsChanged', (accounts) => {
       setTimeout(() => {
-        callbackFn();
+        window.location.reload();
       }, 500);
     });
     
