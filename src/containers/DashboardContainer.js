@@ -20,6 +20,7 @@ import {
 } from "../redux/reducers/lottery";
 import { loadDapp } from "../lib/DappUtils";
 import { newPlayerTicketAddedEventApi } from "../api";
+import {LOTTERY_STATE_CLOSED, LOTTERY_STATE_OPEN} from "../config";
 
 
 const mapStateToProps = state => {
@@ -53,8 +54,13 @@ const mapDispatchToProps = dispatch => {
         pickWinner: () => {
             dispatch(pickWinner());
         },
-        enterIntoLottery: () => {
-            dispatch(enterIntoLottery());
+        enterIntoLottery: (lotteryState) => {
+            if(lotteryState === LOTTERY_STATE_OPEN){
+                dispatch(enterIntoLottery());
+            }
+            if(lotteryState === LOTTERY_STATE_CLOSED){
+                console.log("A new Lottery is not ready yet.");
+            }
         },
         loadDappMainData: () => {
             loadDapp(loadDasboardData);

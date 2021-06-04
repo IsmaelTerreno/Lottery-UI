@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import FlameAnimation from './FlameAnimation';
 import CountDownDate from './CountDownDate';
-import { MAIN_APP_NAME, LOTTEY_STATE_OPEN, FORMAT_DATE_TIME } from "./config";
+import { MAIN_APP_NAME, LOTTERY_STATE_OPEN, FORMAT_DATE_TIME } from "./config";
 import ehtLogo from './img/ethereum.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,9 +61,10 @@ const useStyles = makeStyles((theme) => ({
   balanceTitle:{
     textAlign: 'center',
     letterSpacing: '2px',
-	  textTransform: 'uppercase',
+    textTransform: 'uppercase',
     color: '#ccc',
     fontSize: '20px',
+    marginBottom: '10px',
   },
   buyTicketBtn:{
     height: '53px',
@@ -151,10 +152,11 @@ const HomePublic = ({
               />
             }
             {
-              !lotteryInfo &&
-              <Typography 
-                variant="h3" 
-                component="h3" 
+              lotteryInfo &&
+              !lotteryInfo.startDate &&
+              <Typography
+                variant="h3"
+                component="h3"
                 gutterBottom
                 className={classes.balanceTitle}
               >
@@ -163,9 +165,9 @@ const HomePublic = ({
             }
           </Grid>
         </Grid>
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
+        <div id="stars"/>
+        <div id="stars2"/>
+        <div id="stars3"/>
       </div>
     </>
   );
@@ -176,7 +178,7 @@ HomePublic.defaultProps = {
   balancePrice: 0,
   loadDappMainData: () => {},
   lotteryInfo: {
-    state: LOTTEY_STATE_OPEN,
+    state: LOTTERY_STATE_OPEN,
     startDate: null,
     endDate: null,
     enterPrice: 0,

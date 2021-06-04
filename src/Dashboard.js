@@ -272,7 +272,7 @@ const Dashboard = ({
                 className={classes.buyTicketBtn} 
                 variant="contained" 
                 color="primary"
-                onClick={enterIntoLottery} 
+                onClick={() => (lotteryInfo) ? enterIntoLottery(lotteryInfo.state) : null}
                 data-tut="buy-ticket-dashboard"
               >
                 Buy ticket
