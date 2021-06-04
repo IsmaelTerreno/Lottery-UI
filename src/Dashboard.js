@@ -93,6 +93,14 @@ const useStyles = makeStyles((theme) => ({
       transition: 'all .3s ease-in-out',
     },
   },
+  balanceTitle:{
+    textAlign: 'center',
+    letterSpacing: '2px',
+    textTransform: 'uppercase',
+    color: '#ccc',
+    fontSize: '20px',
+    padding: "40px"
+  },
 }));
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -284,21 +292,45 @@ const Dashboard = ({
                     classNameCustom={classes.countDownDate}
                   />
                 }
+                {
+                  lotteryInfo &&
+                  !lotteryInfo.startDate &&
+                  <Typography
+                      variant="h3"
+                      component="h3"
+                      gutterBottom
+                      className={classes.balanceTitle}
+                  >
+                    Next counter will be ready soon here.
+                  </Typography>
+                }
               </Paper>
             </Grid> 
           }
-          { 
-            lotteryInfo && 
-            lotteryInfo.endDate &&
-            <Grid item xs={12} lg={6}>
-              <Paper data-tut="tickets-section-dashboard">
+          <Grid item xs={12} lg={6}>
+            <Paper data-tut="tickets-section-dashboard">
+              {
+                lotteryInfo &&
+                lotteryInfo.endDate &&
+                countCurrentPositions > 0 &&
                 <PositionsProbabilityPie
-                  countPosition={countCurrentPositions}
-                  totalPositions={countAllPositions - countCurrentPositions}
+                    countPosition={countCurrentPositions}
+                    totalPositions={countAllPositions - countCurrentPositions}
                 />
-              </Paper>
-            </Grid> 
-          }
+              }
+              {
+                countCurrentPositions < 1 &&
+                <Typography
+                    variant="h3"
+                    component="h3"
+                    gutterBottom
+                    className={classes.balanceTitle}
+                >
+                  Buy a ticket to see more information about the pool here.
+                </Typography>
+              }
+            </Paper>
+          </Grid>
           {
             lastWinner &&
             winners.length > 0 &&
