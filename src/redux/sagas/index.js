@@ -27,7 +27,7 @@ import {
   COUNT_CURRENT_POSITIONS_FAIL,
   COUNT_ALL_POSITIONS,
   COUNT_ALL_POSITIONS_SUCCESS,
-  COUNT_ALL_POSITIONS_FAIL,
+  COUNT_ALL_POSITIONS_FAIL, IS_LOTTERY_ADMIN_SUCCESS, IS_LOTTERY_ADMIN_FAIL, IS_LOTTERY_ADMIN,
 } from '../actions/lottery';
 
 import {
@@ -39,7 +39,7 @@ import {
   getLastWinnersApi,
   getLotteryInfoApi,
   countCurrentAddressPositionsApi,
-  countAllCurrentPositionsApi,
+  countAllCurrentPositionsApi, isLotteryAdminApi,
 } from '../../api';
 
 import {APP_API_CALL_FAIL} from '../../config';
@@ -174,6 +174,20 @@ function* countAllCurrentPositionsSaga(){
   }
 }
 
+function* isLotteryAdminApiSaga(){
+  try {
+    const result = yield isLotteryAdminApi();
+    yield put({type: IS_LOTTERY_ADMIN_SUCCESS, isLotteryAdmin: result});
+  } catch (e) {
+    yield put({type: IS_LOTTERY_ADMIN_FAIL});
+    yield put({
+      type: APP_API_CALL_FAIL,
+      message: 'Error when get is admin info',
+      err: e.message
+    });
+  }
+}
+
 export function* watchGetLastWinners() {
   yield takeLatest(GET_LAST_WINNERS, getLastWinnersSaga);
 }
@@ -209,6 +223,9 @@ export function* watchCountCurrentAddressPositions() {
 export function* watchCountAllCurrentPositions() {
   yield takeLatest(COUNT_ALL_POSITIONS, countAllCurrentPositionsSaga);
 }
+export function* watchIsLotteryAdminApiSaga() {
+  yield takeLatest(IS_LOTTERY_ADMIN, isLotteryAdminApiSaga);
+}
 
 export default function* rootSaga() {
   yield all([
@@ -221,5 +238,6 @@ export default function* rootSaga() {
     watchGetLotteryInfo(),
     watchCountCurrentAddressPositions(),
     watchCountAllCurrentPositions(),
+    watchIsLotteryAdminApiSaga(),
   ]);
 }

@@ -87,6 +87,15 @@ export const countAllCurrentPositionsApi = async () => {
     }
 };
 
+export const isLotteryAdminApi = async () => {
+    try {
+        const result = await LotteryContract.methods.isLotteryAdmin().call({ from: accounts[0] });
+        return result;
+    } catch (error) {
+        return 0;
+    }
+};
+
 export const newPlayerTicketAddedEventApi = async (fnSubscriptionCallback) => {
     try {
         await LotteryContract.events.NewPlayerTicketAdded()

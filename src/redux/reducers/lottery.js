@@ -4,7 +4,7 @@ import {
   GET_LAST_WINNER_SUCCESS,
   GET_LOTTERY_INFO_SUCCESS,
   COUNT_CURRENT_POSITIONS_SUCCESS,
-  COUNT_ALL_POSITIONS_SUCCESS,
+  COUNT_ALL_POSITIONS_SUCCESS, IS_LOTTERY_ADMIN_SUCCESS,
 } from '../actions/lottery';
 import {createSelector} from 'reselect';
 
@@ -17,6 +17,7 @@ const initState = {
   lotteryInfo: null,
   countCurrentPositions: 0,
   countAllPositions:0,
+  isLotteryAdmin: false,
 };
 
 export const LoteryReducer = (state = initState, action) => {
@@ -50,7 +51,12 @@ export const LoteryReducer = (state = initState, action) => {
       return {
         ...state,
         countAllPositions: action.countAllPositions
-      };   
+      };
+    case IS_LOTTERY_ADMIN_SUCCESS:
+      return {
+        ...state,
+        isLotteryAdmin: action.isLotteryAdmin
+      };
     default:
       return state;
   }
@@ -63,6 +69,7 @@ const balancePriceSelector = state => state.lottery.balancePrice;
 const lotteryInfoSelector = state => state.lottery.lotteryInfo;
 const countCurrentPositionsSelector = state => state.lottery.countCurrentPositions;
 const countAllPositionsSelector = state => state.lottery.countAllPositions;
+const isLotteryAdminSelector = state => state.lottery.isLotteryAdmin;
 
 
 export const getCurrentLottey = createSelector(
@@ -98,4 +105,9 @@ export const getCountCurrentPositionsSelector = createSelector(
 export const getCountAllPositionSelector = createSelector(
   countAllPositionsSelector,
   countAllPositions => countAllPositions
+);
+
+export const getIsLotteryAdminSelector = createSelector(
+    isLotteryAdminSelector,
+    isLotteryAdmin => isLotteryAdmin
 );

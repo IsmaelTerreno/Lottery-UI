@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Dashboard from '../Dashboard';
-import { 
+import {
     findLastWinners,
     startNewLottery,
     enterIntoLottery,
@@ -8,15 +8,15 @@ import {
     getLastWinner,
     getBalancePrice,
     countCurrentPositions,
-    countAllPositions,
+    countAllPositions, isLotteryAdmin,
 } from "../redux/actions/lottery";
-import { 
+import {
     getWinnersListSelector,
     getLastWinnerSelector,
     getBalancePriceSelector,
     getLotteryInfoSelector,
     getCountCurrentPositionsSelector,
-    getCountAllPositionSelector,
+    getCountAllPositionSelector, getIsLotteryAdminSelector,
 } from "../redux/reducers/lottery";
 import { loadDapp } from "../lib/DappUtils";
 import { newPlayerTicketAddedEventApi } from "../api";
@@ -30,6 +30,7 @@ const mapStateToProps = state => {
         lotteryInfo: getLotteryInfoSelector(state),
         countCurrentPositions: getCountCurrentPositionsSelector(state),
         countAllPositions: getCountAllPositionSelector(state),
+        isAdminRole: getIsLotteryAdminSelector(state),
     }
 };
   
@@ -40,6 +41,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(findLastWinners());
         dispatch(countCurrentPositions());
         dispatch(countAllPositions());
+        dispatch(isLotteryAdmin());
     };
     newPlayerTicketAddedEventApi((event)=>{
         loadDasboardData();

@@ -25,6 +25,9 @@ export const COUNT_CURRENT_POSITIONS_FAIL = 'COUNT_CURRENT_POSITIONS_FAIL';
 export const COUNT_ALL_POSITIONS = 'COUNT_ALL_POSITIONS';
 export const COUNT_ALL_POSITIONS_SUCCESS = 'COUNT_ALL_POSITIONS_SUCCESS';
 export const COUNT_ALL_POSITIONS_FAIL = 'COUNT_ALL_POSITIONS_FAIL';
+export const IS_LOTTERY_ADMIN = 'IS_LOTTERY_ADMIN';
+export const IS_LOTTERY_ADMIN_SUCCESS = 'IS_LOTTERY_ADMIN_SUCCESS';
+export const IS_LOTTERY_ADMIN_FAIL = 'IS_LOTTERY_ADMIN_FAIL';
 
 export const findLastWinners = () => {
   return {
@@ -77,5 +80,11 @@ export const countCurrentPositions = () => {
 export const countAllPositions = () => {
   return {
     type: COUNT_ALL_POSITIONS
+  };
+};
+
+export const isLotteryAdmin = () => {
+  return {
+    type: IS_LOTTERY_ADMIN
   };
 };
