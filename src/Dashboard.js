@@ -126,7 +126,6 @@ const Dashboard = ({
   lotteryInfo,
   countCurrentPositions,
   countAllPositions,
-  isLotteryAdmin,
 }) => {
   const classes = useStyles();
   const classesToolbar = useToolbarStyles();
