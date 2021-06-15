@@ -1,5 +1,5 @@
 import moment from "moment";
-import { FORMAT_DATE_TIME, LOTTERY_STATE_OPEN } from "./config";
+import {DURATION_DAYS_LOTTERY, FORMAT_DATE_TIME, LOTTERY_STATE_OPEN} from "./config";
 import { LotteryContract, web3, accounts } from "./lib/DappUtils";
 import Chance from 'chance';
 const chance = new Chance();
@@ -8,7 +8,7 @@ const ENTER_PRICE_LOTTERY_IN_ETHER = '0.01';
 export const startLotteryApi = async () => {
     const startDate = new Date();
     const endDate = new Date();
-    const numberOfDayToAdd = 1;
+    const numberOfDayToAdd = DURATION_DAYS_LOTTERY;
     endDate.setDate(endDate.getDate() + numberOfDayToAdd );
     await LotteryContract.methods.start_new_lottery(startDate.getTime(), endDate.getTime()).send({ from: accounts[0]});
 };

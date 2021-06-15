@@ -42,13 +42,14 @@ class CountDownDate extends React.Component {
 	componentDidMount() {
     const processTime = () => {
 			const { timeTillDate, timeFormat } = this.props;
-			const then = moment(timeTillDate, timeFormat);
-			const now = moment();
-			const countdown = moment(then - now);
-			const days = countdown.format('D');
-			const hours = countdown.format('HH');
-			const minutes = countdown.format('mm');
-			const seconds = countdown.format('ss');
+			const eventTime = moment(timeTillDate, timeFormat);
+			const currentTime = moment();
+			const diffTime = moment(eventTime - currentTime);
+			const countdown = moment.duration(diffTime);
+			const days = countdown.days();
+			const hours = countdown.hours() ;
+			const minutes = countdown.minutes();
+			const seconds = countdown.seconds();
 
 			this.setState({ days, hours, minutes, seconds });
 		};
@@ -77,34 +78,26 @@ class CountDownDate extends React.Component {
 			<div className={"countdown-main " + this.props.classNameCustom}>
 				<h1 className="countdown-title">Next draw countdown</h1>
 				<div className='countdown-wrapper'>
-					{days && (
-						<div className='countdown-item'>
-							<SVGCircle radius={daysRadius} />
-							{days} 
-							<span>days</span>
-						</div>
-					)}
-					{hours && (
-						<div className='countdown-item'>							
-							<SVGCircle radius={hoursRadius} />
-							{hours} 
-							<span>hours</span>
-						</div>
-					)}
-					{minutes && (
-						<div className='countdown-item'>
-							<SVGCircle radius={minutesRadius} />
-							{minutes} 
-							<span>minutes</span>
-						</div>
-					)}
-					{seconds && (
-						<div className='countdown-item'>
-							<SVGCircle radius={secondsRadius} />
-							{seconds} 
-							<span>seconds</span>
-						</div>
-					)}
+					<div className='countdown-item'>
+						<SVGCircle radius={daysRadius} />
+						{days}
+						<span>days</span>
+					</div>
+					<div className='countdown-item'>
+						<SVGCircle radius={hoursRadius} />
+						{hours}
+						<span>hours</span>
+					</div>
+					<div className='countdown-item'>
+						<SVGCircle radius={minutesRadius} />
+						{minutes}
+						<span>minutes</span>
+					</div>
+					<div className='countdown-item'>
+						<SVGCircle radius={secondsRadius} />
+						{seconds}
+						<span>seconds</span>
+					</div>
 				</div>
 			</div>
 		);
