@@ -23,7 +23,6 @@ import HelpIcon from '@material-ui/icons/Help';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: '40px',
-    height: '1200px'
   },
   paper: {
     padding: theme.spacing(2),
