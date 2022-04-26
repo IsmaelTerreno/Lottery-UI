@@ -15,7 +15,7 @@ import {
   Toolbar, 
 } from '@material-ui/core';
 import CountUp from 'react-countup';
-import { MAIN_APP_NAME, FORMAT_DATE_TIME } from "./config";
+import {MAIN_APP_NAME, FORMAT_DATE_TIME, LOTTERY_STATE_CLOSED} from "./config";
 import ehtLogo from './img/ethereum.png';
 import Tour from "reactour";
 import HelpIcon from '@material-ui/icons/Help';
@@ -99,6 +99,14 @@ const useStyles = makeStyles((theme) => ({
     color: '#ccc',
     fontSize: '20px',
     padding: "40px"
+  },
+  buyToSeeStatus:{
+    textAlign: 'center',
+    letterSpacing: '2px',
+    textTransform: 'uppercase',
+    color: '#ccc',
+    fontSize: '20px',
+    padding: "135px 40px 135px 40px"
   },
 }));
 
@@ -317,12 +325,14 @@ const Dashboard = ({
                 />
               }
               {
-                countCurrentPositions < 1 &&
+                lotteryInfo &&
+                lotteryInfo.state !== LOTTERY_STATE_CLOSED &&
+                countCurrentPositions === 0 &&
                 <Typography
                     variant="h3"
                     component="h3"
                     gutterBottom
-                    className={classes.balanceTitle}
+                    className={classes.buyToSeeStatus}
                 >
                   Buy a ticket to see more information about the pool here.
                 </Typography>

@@ -81,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePublic = ({
   balancePrice,
-  isAdminRole,
   loadDappMainData,
   loginToApp,
   lotteryInfo,
