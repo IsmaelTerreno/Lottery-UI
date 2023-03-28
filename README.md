@@ -1,6 +1,7 @@
 # Lottery Smart Contract Dapp
 This is a dapp that uses the smart contract written in Solidity for a lottery game, with the ability to start and end the lottery, add players, select a winner, and calculate the benefit result.
 
+**NOTE**: This is just a POC to use solidity smart contract demo
 
 The smart contract used can be found on [this repository](https://github.com/IsmaelTerreno/Lottery).
 ## Live demo
